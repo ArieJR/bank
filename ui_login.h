@@ -226,7 +226,7 @@ public:
         biljetKeuze_biljetNietBelangrijk_button->setGeometry(QRect(260, 180, 75, 23));
         biljetKeuze_biljetOpties1_button = new QPushButton(biljetScherm);
         biljetKeuze_biljetOpties1_button->setObjectName(QString::fromUtf8("biljetKeuze_biljetOpties1_button"));
-        biljetKeuze_biljetOpties1_button->setGeometry(QRect(260, 140, 75, 23));
+        biljetKeuze_biljetOpties1_button->setGeometry(QRect(260, 140, 81, 23));
         ATM->addWidget(biljetScherm);
         bedragScherm = new QWidget();
         bedragScherm->setObjectName(QString::fromUtf8("bedragScherm"));
@@ -270,7 +270,7 @@ public:
 
         retranslateUi(Login);
 
-        ATM->setCurrentIndex(5);
+        ATM->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Login);
@@ -304,28 +304,28 @@ public:
         saldo_hoofdscherm_button->setText(QCoreApplication::translate("Login", "Hoofdscherm", nullptr));
         saldo_label->setText(QCoreApplication::translate("Login", "TextLabel", nullptr));
         Labelpinnen->setText(QCoreApplication::translate("Login", "KeuzeScherm pinnen", nullptr));
-        pinKeuze_optie1_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_optie2_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_optie3_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_optie4_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_optie5_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_zelfBedragKiezen_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_welkom_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        pinKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
+        pinKeuze_optie1_button->setText(QCoreApplication::translate("Login", "\342\202\25420,-", nullptr));
+        pinKeuze_optie2_button->setText(QCoreApplication::translate("Login", "\342\202\25450,-", nullptr));
+        pinKeuze_optie3_button->setText(QCoreApplication::translate("Login", "\342\202\25470,-", nullptr));
+        pinKeuze_optie4_button->setText(QCoreApplication::translate("Login", "\342\202\254100,-", nullptr));
+        pinKeuze_optie5_button->setText(QCoreApplication::translate("Login", "\342\202\254120,-", nullptr));
+        pinKeuze_zelfBedragKiezen_button->setText(QCoreApplication::translate("Login", "Zelf kiezen", nullptr));
+        pinKeuze_welkom_button->setText(QCoreApplication::translate("Login", "afbreken", nullptr));
+        pinKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "Hoofdscherm", nullptr));
         label_5->setText(QCoreApplication::translate("Login", "biljetKeuzeScherm", nullptr));
-        biljetKeuze_welkom_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        biljetKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        biljetKeuze_biljetNietBelangrijk_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        biljetKeuze_biljetOpties1_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
+        biljetKeuze_welkom_button->setText(QCoreApplication::translate("Login", "Afbreken", nullptr));
+        biljetKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "Hoofdscherm", nullptr));
+        biljetKeuze_biljetNietBelangrijk_button->setText(QCoreApplication::translate("Login", "Boeit niet", nullptr));
+        biljetKeuze_biljetOpties1_button->setText(QCoreApplication::translate("Login", "Opties biljetten", nullptr));
         label_6->setText(QCoreApplication::translate("Login", "BedragKeuzeScherm", nullptr));
-        bedragKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        bedragKeuze_welkom_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        bedragKeuze_bevestigen_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
+        bedragKeuze_hoofd_button->setText(QCoreApplication::translate("Login", "Afbreken", nullptr));
+        bedragKeuze_welkom_button->setText(QCoreApplication::translate("Login", "Hoofdscherm", nullptr));
+        bedragKeuze_bevestigen_button->setText(QCoreApplication::translate("Login", "Bevestigen", nullptr));
         label_7->setText(QCoreApplication::translate("Login", "Bon Scherm", nullptr));
-        bon_metBon_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        bon_zonderBon_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        bon_hoofd_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
-        bon_welkom_button->setText(QCoreApplication::translate("Login", "PushButton", nullptr));
+        bon_metBon_button->setText(QCoreApplication::translate("Login", "Ik wil een bon", nullptr));
+        bon_zonderBon_button->setText(QCoreApplication::translate("Login", "Ik wil geen bon", nullptr));
+        bon_hoofd_button->setText(QCoreApplication::translate("Login", "Hoofdscherm", nullptr));
+        bon_welkom_button->setText(QCoreApplication::translate("Login", "Afbreken", nullptr));
         label_8->setText(QCoreApplication::translate("Login", "verwerkingsScherm", nullptr));
     } // retranslateUi
 

@@ -56,12 +56,24 @@ Login::Login(QWidget *parent)
 
 
 }
-
+void Login::pincodeCheck()
+{
+    // check for correctness of the pincode
+}
 void Login::goBack()
 {
-
+    // go back to previous page
 }
 
+int Login::getPreviousIndex()
+{
+    return previousIndex;
+}
+
+void Login::setPreviousIndex(int idx){
+    previousIndex = idx;
+    return;
+}
 void Login::gotoWelkomScherm()
 {
     ATM->setCurrentIndex(0);

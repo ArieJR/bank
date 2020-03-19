@@ -14,7 +14,7 @@ public:
     explicit Login(QWidget *parent = nullptr);
 
 private slots:
-
+    int previousIndex;
     void gotoWelkomScherm(); //0
     void gotoInlogScherm(); //1
     void gotoTaalScherm(); //2
@@ -26,6 +26,9 @@ private slots:
     void gotoBonScherm(); //8
     void gotoVerwerkingsScherm(); //9
     void goBack();
+    int getPreviousIndex();
+    void setPreviousIndex(int idx);
+    void pincodeCheck();
 
 private:
 

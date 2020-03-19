@@ -29,7 +29,7 @@
     <enum>QFrame::Panel</enum>
    </property>
    <property name="currentIndex">
-    <number>7</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="welkomScherm">
     <widget class="QPushButton" name="welkom_taal_button">
@@ -564,7 +564,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Afbreken</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bedragKeuze_welkom_button">
@@ -577,7 +577,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Hoofdscherm</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bedragKeuze_bevestigen_button">
@@ -590,7 +590,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Bevestigen</string>
      </property>
     </widget>
    </widget>
@@ -618,7 +618,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Ik wil een bon</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bon_zonderBon_button">
@@ -631,7 +631,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Ik wil geen bon</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bon_hoofd_button">
@@ -644,7 +644,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Hoofdscherm</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bon_welkom_button">
@@ -657,7 +657,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Afbreken</string>
      </property>
     </widget>
    </widget>
