@@ -1,20 +1,27 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-//! [0]
+#include <QTranslator>
 #include "ui_login.h"
-//! [0]
+//#include "data.h"
 
-//! [1]
 class Login : public QWidget, private Ui::Login
 {
     Q_OBJECT
+protected:
+    
 
+protected slots:
+    
 public:
     explicit Login(QWidget *parent = nullptr);
 
-private slots:
+
+private:
     int previousIndex;
+
+private slots:
+
     void gotoWelkomScherm(); //0
     void gotoInlogScherm(); //1
     void gotoTaalScherm(); //2
@@ -25,12 +32,13 @@ private slots:
     void gotoBedragScherm(); //7
     void gotoBonScherm(); //8
     void gotoVerwerkingsScherm(); //9
-    void goBack();
+    void gotoPreviousPage();
     int getPreviousIndex();
     void setPreviousIndex(int idx);
     void pincodeCheck();
+    void changeLabel(QLabel* labelToChange, const QString &newLabelContent);
+    void changeATMPage(int idx);
 
-private:
 
 
 };

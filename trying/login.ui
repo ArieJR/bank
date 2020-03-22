@@ -29,7 +29,7 @@
     <enum>QFrame::Panel</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="welkomScherm">
     <widget class="QPushButton" name="welkom_taal_button">
@@ -45,7 +45,7 @@
       <string>[language settings]</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="welkom_label">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -77,24 +77,14 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>170</y>
+       <x>130</x>
+       <y>80</y>
        <width>91</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
       <string>Voer uw pincode in</string>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="inlog_invoerveldPincode">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>220</y>
-       <width>104</width>
-       <height>31</height>
-      </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="inlog_taal_button">
@@ -134,6 +124,32 @@
      </property>
      <property name="text">
       <string>Afbreken</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>230</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="inlog_invoerveldPincode">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>180</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </widget>

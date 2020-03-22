@@ -1,5 +1,7 @@
 #include "login.h"
 #include <QWidget>
+#include <QLineEdit>
+
 
 
 //! [0]
@@ -7,6 +9,8 @@ Login::Login(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+
+    
     //ATM->setCurrentIndex(0);
     connect(welkom_inlog_button, SIGNAL (released()), this, SLOT (gotoInlogScherm()));
     connect(welkom_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm()));
@@ -55,25 +59,33 @@ Login::Login(QWidget *parent)
     connect(bon_zonderBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
 
 
+
+}
+void Login::changeLabel(QLabel* labelToChange, const QString &newLabelContent){
+   labelToChange->setText(newLabelContent);
 }
 void Login::pincodeCheck()
 {
     // check for correctness of the pincode
+    // pincode will be verified in the database in the future
 }
-void Login::goBack()
-{
-    // go back to previous page
-}
+
 
 int Login::getPreviousIndex()
 {
-    return previousIndex;
+    return previousIndex; //get the previous index number of the page
 }
 
 void Login::setPreviousIndex(int idx){
-    previousIndex = idx;
+    previousIndex = idx;      //set a new previous index number of the page
     return;
 }
+void Login::changeATMPage(int idx){
+    setPreviousIndex(ATM->currentIndex());
+    ATM->setCurrentIndex(idx);
+}
+
+// go to different screens
 void Login::gotoWelkomScherm()
 {
     ATM->setCurrentIndex(0);
@@ -123,3 +135,15 @@ void Login::gotoVerwerkingsScherm()
 {
     ATM->setCurrentIndex(9);
 }
+void Login::gotoPreviousPage()
+{
+    int tempPreviousIndex;
+
+    tempPreviousIndex = getPreviousIndex();
+    ATM->setCurrentIndex(getPreviousIndex());
+    setPreviousIndex(tempPreviousIndex);
+    // go back to previous page
+}
+
+
+

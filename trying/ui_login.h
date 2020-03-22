@@ -12,7 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QWidget>
@@ -25,14 +25,15 @@ public:
     QStackedWidget *ATM;
     QWidget *welkomScherm;
     QPushButton *welkom_taal_button;
-    QLabel *label;
+    QLabel *welkom_label;
     QPushButton *welkom_inlog_button;
     QWidget *inlogScherm;
     QLabel *label_4;
-    QPlainTextEdit *inlog_invoerveldPincode;
     QPushButton *inlog_taal_button;
     QPushButton *inlog_hoofd_button;
     QPushButton *inlog_welkom_button;
+    QLabel *label_9;
+    QLineEdit *inlog_invoerveldPincode;
     QWidget *taalScherm;
     QPushButton *taal_optieNederlands_button;
     QPushButton *taal_optieEngels_button;
@@ -97,9 +98,9 @@ public:
         welkom_taal_button = new QPushButton(welkomScherm);
         welkom_taal_button->setObjectName(QString::fromUtf8("welkom_taal_button"));
         welkom_taal_button->setGeometry(QRect(264, 10, 101, 41));
-        label = new QLabel(welkomScherm);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(140, 120, 91, 31));
+        welkom_label = new QLabel(welkomScherm);
+        welkom_label->setObjectName(QString::fromUtf8("welkom_label"));
+        welkom_label->setGeometry(QRect(140, 120, 91, 31));
         welkom_inlog_button = new QPushButton(welkomScherm);
         welkom_inlog_button->setObjectName(QString::fromUtf8("welkom_inlog_button"));
         welkom_inlog_button->setGeometry(QRect(214, 220, 121, 23));
@@ -108,10 +109,7 @@ public:
         inlogScherm->setObjectName(QString::fromUtf8("inlogScherm"));
         label_4 = new QLabel(inlogScherm);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(140, 170, 91, 31));
-        inlog_invoerveldPincode = new QPlainTextEdit(inlogScherm);
-        inlog_invoerveldPincode->setObjectName(QString::fromUtf8("inlog_invoerveldPincode"));
-        inlog_invoerveldPincode->setGeometry(QRect(130, 220, 104, 31));
+        label_4->setGeometry(QRect(130, 80, 91, 31));
         inlog_taal_button = new QPushButton(inlogScherm);
         inlog_taal_button->setObjectName(QString::fromUtf8("inlog_taal_button"));
         inlog_taal_button->setGeometry(QRect(270, 20, 101, 41));
@@ -121,6 +119,13 @@ public:
         inlog_welkom_button = new QPushButton(inlogScherm);
         inlog_welkom_button->setObjectName(QString::fromUtf8("inlog_welkom_button"));
         inlog_welkom_button->setGeometry(QRect(290, 240, 75, 23));
+        label_9 = new QLabel(inlogScherm);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setGeometry(QRect(150, 230, 47, 13));
+        inlog_invoerveldPincode = new QLineEdit(inlogScherm);
+        inlog_invoerveldPincode->setObjectName(QString::fromUtf8("inlog_invoerveldPincode"));
+        inlog_invoerveldPincode->setGeometry(QRect(120, 180, 113, 20));
+        inlog_invoerveldPincode->setEchoMode(QLineEdit::Password);
         ATM->addWidget(inlogScherm);
         taalScherm = new QWidget();
         taalScherm->setObjectName(QString::fromUtf8("taalScherm"));
@@ -270,7 +275,7 @@ public:
 
         retranslateUi(Login);
 
-        ATM->setCurrentIndex(0);
+        ATM->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Login);
@@ -280,13 +285,14 @@ public:
     {
         Login->setWindowTitle(QCoreApplication::translate("Login", "Form", nullptr));
         welkom_taal_button->setText(QCoreApplication::translate("Login", "[language settings]", nullptr));
-        label->setText(QCoreApplication::translate("Login", "welkom \n"
+        welkom_label->setText(QCoreApplication::translate("Login", "welkom \n"
 " voer uw pas in", nullptr));
         welkom_inlog_button->setText(QCoreApplication::translate("Login", "Pas invoer simulatie", nullptr));
         label_4->setText(QCoreApplication::translate("Login", "Voer uw pincode in", nullptr));
         inlog_taal_button->setText(QCoreApplication::translate("Login", "[language settings]", nullptr));
         inlog_hoofd_button->setText(QCoreApplication::translate("Login", "Doorgaan", nullptr));
         inlog_welkom_button->setText(QCoreApplication::translate("Login", "Afbreken", nullptr));
+        label_9->setText(QCoreApplication::translate("Login", "TextLabel", nullptr));
         taal_optieNederlands_button->setText(QCoreApplication::translate("Login", "Nederlands", nullptr));
         taal_optieEngels_button->setText(QCoreApplication::translate("Login", "English", nullptr));
         taal_optieDuits_button->setText(QCoreApplication::translate("Login", "Deutsch", nullptr));
