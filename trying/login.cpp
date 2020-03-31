@@ -81,59 +81,60 @@ void Login::setPreviousIndex(int idx){
     return;
 }
 void Login::changeATMPage(int idx){
-    setPreviousIndex(ATM->currentIndex());
+    setPreviousIndex(ATM->currentIndex()); // setting the previous index right
     ATM->setCurrentIndex(idx);
 }
 
-// go to different screens
+// go to different screens, many of those will require a lot more. they lack functionality for now.
 void Login::gotoWelkomScherm()
 {
-    ATM->setCurrentIndex(0);
+    ATM->setCurrentIndex(0); //end session?
 }
 
 void Login::gotoInlogScherm()
 {
-    ATM->setCurrentIndex(1);
+    ATM->setCurrentIndex(1); //UID detection from microcontroller
 }
 
 void Login::gotoTaalScherm()
 {
-    ATM->setCurrentIndex(2);
+    ATM->setCurrentIndex(2); //might need a second 'taalScherm' since the same one is used when someone is logged in and when someone is not
 }
 
 void Login::gotoHoofdScherm()
 {
-    ATM->setCurrentIndex(3);
+    ATM->setCurrentIndex(3); // snell pinnen option should be removed when someone has less than €70,-
 }
 
 void Login::gotoSaldoScherm()
 {
-    ATM->setCurrentIndex(4);
+    ATM->setCurrentIndex(4); //get saldo from database to show saldo
 }
 
 void Login::gotoPinKeuzeScherm()
 {
-    ATM->setCurrentIndex(5);
+    ATM->setCurrentIndex(5); //user is given a couple withdraw options, he can also choose to put in the amount he wants (still no more than the maximum withdrawable amount, or more than his/her balance)
 }
 
 void Login::gotoBiljetScherm()
 {
-    ATM->setCurrentIndex(6);
+    ATM->setCurrentIndex(6); //there will be a different class dedicated to the different options a user can pick between.
 }
 
 void Login::gotoBedragScherm()
 {
-    ATM->setCurrentIndex(7);
+    ATM->setCurrentIndex(7); // user can choose how much he wants to withdraw, within the limit ofcourse.
 }
 
 void Login::gotoBonScherm()
 {
-    ATM->setCurrentIndex(8);
+    ATM->setCurrentIndex(8); // check if there is enough paper left in the printer
 }
 
 void Login::gotoVerwerkingsScherm()
 {
-    ATM->setCurrentIndex(9);
+    ATM->setCurrentIndex(9); //before the money is being dispensed, the GUI will need to receive confirmation from the database first
+                                //the money is being reserved on a special account before the confirmation is sent
 }
 void Login::gotoPreviousPage()
 {

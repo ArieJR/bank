@@ -275,7 +275,7 @@ public:
 
         retranslateUi(Login);
 
-        ATM->setCurrentIndex(3);
+        ATM->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(Login);

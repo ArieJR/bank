@@ -22,6 +22,11 @@
      <height>281</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+    </font>
+   </property>
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
@@ -29,7 +34,7 @@
     <enum>QFrame::Panel</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>6</number>
    </property>
    <widget class="QWidget" name="welkomScherm">
     <widget class="QPushButton" name="welkom_taal_button">
