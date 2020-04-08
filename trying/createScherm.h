@@ -1,14 +1,58 @@
 #ifndef CREATESCHERM_H
 #define CREATESCHERM_H
 
+#include <QTranslator>
+#include "ui_login.h"
+#include "data.h"
 
-class createScherm
+class createScherm : QWidget, private Ui::Login
 {
 public:
-    createScherm();
+    void createWelkomScherm();
+        void createTaalSchermButton();
+        void createSession();
+            //connect to datebase
+            //check if card has an account at our bank
+            //check if card has an account at an other bank
+            //check if card is blocked
+
+    void cardBlocked();
+        void cardIsBlockedMsg();
+        void endSession();
+            //save all data
+            //check if any money needs to be dispensed
+            //disconnect database
+
+    void returnCard();
+        //signal to arduino to return card
+    void createInlogScherm();
+        bool verifyPincode();
+            void resetLoginAttempts();
+
+        void wrongPassword();
+            void increaseLoginAttempts();
+            void wrongPwMsg();
+                //check if blocked
+
+    void createTaalScherm();
+
+        //make language buttons use qtranslator
+        void returnButtonLanguage();
+            bool getActiveSession();
+                //welkomscherm or inlogscherm depending if there is an active session.
+
+    //createScherm();
+        Q_OBJECT
+    protected:
+
+    protected slots:
+
+private:
+
 };
 
-//if you finish a line add a comment *DONE <NAME>* behind it
+
+
 
 //welkomsscherm
     //needs a language button
