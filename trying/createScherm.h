@@ -8,6 +8,8 @@ public:
     createScherm();
 };
 
+//if you finish a line add a comment *DONE <NAME>* behind it
+
 //welkomsscherm
     //needs a language button
         //-->taalScherm (when no session activated)
