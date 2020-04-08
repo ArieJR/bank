@@ -7,12 +7,14 @@ QT = core gui \
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
+    createScherm.cpp \
     data.cpp \
     login.cpp \
     main.cpp
 
 
 HEADERS += \
+    createScherm.h \
     data.h \
     login.h
 

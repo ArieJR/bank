@@ -3,7 +3,7 @@
 
 #include <QTranslator>
 #include "ui_login.h"
-//#include "data.h"
+#include "data.h"
 
 class Login : public QWidget, private Ui::Login
 {
