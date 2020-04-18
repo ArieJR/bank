@@ -1,39 +1,46 @@
 #include "login.h"
 #include <QWidget>
 #include <QLineEdit>
+//#include "createScherm.h"
+#include "QListWidgetItem"
+#include "data.h"
 
 
 
 //! [0]
 Login::Login(QWidget *parent)
-    : QWidget(parent)
-{
-    setupUi(this);
+    : QWidget(parent),
+    ui (new Ui::Login)
 
+{
+
+    setupUi(this);
+    TranslateDutch();
+    //createWelkomScherm();
     
     //ATM->setCurrentIndex(0);
-    connect(welkom_inlog_button, SIGNAL (released()), this, SLOT (gotoInlogScherm()));
-    connect(welkom_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm()));
+    connect(welkom_inlog_button, SIGNAL (released()), this, SLOT (gotoInlogScherm())); //works on arduino input
+    connect(welkom_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm())); //check
 
-    connect(inlog_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm()));
+    connect(inlog_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm())); //check
     connect(inlog_hoofd_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(inlog_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(inlog_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
 
-    connect(taal_hoofd_of_welkom_of_inlog_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
-    connect(taal_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
-    connect(taal_optieDuits_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(taal_optieEngels_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(taal_optieNederlands_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
+    connect(taal_hoofd_of_welkom_of_inlog_button, SIGNAL (released()), this, SLOT (gotoPreviousPage()));
+    connect(taal_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
+    connect(taal_optieDuits_button, SIGNAL (released()), this, SLOT (gotoPreviousPage()));
+    connect(taal_optieEngels_button, SIGNAL (released()), this, SLOT (gotoPreviousPage()));
+    connect(taal_optieNederlands_button, SIGNAL (released()), this, SLOT (gotoPreviousPage()));
 
     connect(hoofd_pinKeuze_button, SIGNAL (released()), this, SLOT (gotoPinKeuzeScherm()));
     connect(hoofd_saldo_button, SIGNAL (released()), this, SLOT (gotoSaldoScherm()));
     connect(hoofd_snelPinnen_button, SIGNAL (released()), this, SLOT (gotoBonScherm()));
     connect(hoofd_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm()));
-    connect(hoofd_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(hoofd_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
 
     connect(saldo_hoofdscherm_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(saldo_pinKeuze_button, SIGNAL (released()), this, SLOT (gotopinKeuzeScherm()));
-    connect(saldo_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(saldo_pinKeuze_button, SIGNAL (released()), this, SLOT (gotoPinKeuzeScherm()));
+    connect(saldo_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
 
     connect(pinKeuze_hoofd_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
     connect(pinKeuze_optie1_button, SIGNAL (released()), this, SLOT (gotoBiljetScherm()));
@@ -42,109 +49,392 @@ Login::Login(QWidget *parent)
     connect(pinKeuze_optie4_button, SIGNAL (released()), this, SLOT (gotoBiljetScherm()));
     connect(pinKeuze_optie5_button, SIGNAL (released()), this, SLOT (gotoBiljetScherm()));
     connect(pinKeuze_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
-    connect(pinKeuze_zelfBedragKiezen_button, SIGNAL (released()), this, SLOT (gotoBedragKeuzeScherm()));
+    connect(pinKeuze_zelfBedragKiezen_button, SIGNAL (released()), this, SLOT (gotoBedragScherm()));
 
     connect(biljetKeuze_biljetNietBelangrijk_button, SIGNAL (released()), this, SLOT (gotoBonScherm()));
     connect(biljetKeuze_biljetOpties1_button, SIGNAL (released()), this, SLOT (gotoBonScherm()));
     connect(biljetKeuze_hoofd_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(biljetKeuze_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(biljetKeuze_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
 
     connect(bedragKeuze_bevestigen_button, SIGNAL (released()), this, SLOT (gotoBiljetScherm()));
     connect(bedragKeuze_hoofd_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
-    connect(bedragKeuze_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(bedragKeuze_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
 
     connect(bon_hoofd_button, SIGNAL (released()), this, SLOT (gotoHoofdScherm()));
     connect(bon_metBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
-    connect(bon_welkom_button, SIGNAL (released()), this, SLOT (gotoWelkomScherm()));
+    connect(bon_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
     connect(bon_zonderBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
 
 
 
 }
-void Login::changeLabel(QLabel* labelToChange, const QString &newLabelContent){
-   labelToChange->setText(newLabelContent);
-}
-void Login::pincodeCheck()
-{
-    // check for correctness of the pincode
-    // pincode will be verified in the database in the future
+//#######################CHANGE CONTAINER MESSAGE##########################################################################################################################
+
+void Login::labelContent(QLabel *changeLabelTo, const QString &newLabelContent){
+   changeLabelTo->setText(newLabelContent);
 }
 
+void Login::buttonContent(QPushButton *changeButtonTo, const QString &newButtonContent)
+{
+   changeButtonTo->setText(newButtonContent);
+}
+
+
+//################################INDEX'S###############################################################
+
+void Login::changeATMPage(int idx)
+{
+    setPreviousIndex(ATM->currentIndex()); // setting the previous index right
+    ATM->setCurrentIndex(idx);
+}
 
 int Login::getPreviousIndex()
 {
     return previousIndex; //get the previous index number of the page
 }
 
-void Login::setPreviousIndex(int idx){
+void Login::setPreviousIndex(int idx)
+{
     previousIndex = idx;      //set a new previous index number of the page
     return;
 }
-void Login::changeATMPage(int idx){
-    setPreviousIndex(ATM->currentIndex()); // setting the previous index right
-    ATM->setCurrentIndex(idx);
-}
 
-// go to different screens, many of those will require a lot more. they lack functionality for now.
-void Login::gotoWelkomScherm()
-{
-    ATM->setCurrentIndex(0); //end session?
-}
-
-void Login::gotoInlogScherm()
-{
-    ATM->setCurrentIndex(1); //UID detection from microcontroller
-}
-
-void Login::gotoTaalScherm()
-{
-    ATM->setCurrentIndex(2); //might need a second 'taalScherm' since the same one is used when someone is logged in and when someone is not
-}
-
-void Login::gotoHoofdScherm()
-{
-    ATM->setCurrentIndex(3); // snell pinnen option should be removed when someone has less than €70,-
-}
-
-void Login::gotoSaldoScherm()
-{
-    ATM->setCurrentIndex(4); //get saldo from database to show saldo
-}
-
-void Login::gotoPinKeuzeScherm()
-{
-    ATM->setCurrentIndex(5); //user is given a couple withdraw options, he can also choose to put in the amount he wants (still no more than the maximum withdrawable amount, or more than his/her balance)
-}
-
-void Login::gotoBiljetScherm()
-{
-    ATM->setCurrentIndex(6); //there will be a different class dedicated to the different options a user can pick between.
-}
-
-void Login::gotoBedragScherm()
-{
-    ATM->setCurrentIndex(7); // user can choose how much he wants to withdraw, within the limit ofcourse.
-}
-
-void Login::gotoBonScherm()
-{
-    ATM->setCurrentIndex(8); // check if there is enough paper left in the printer
-}
-
-void Login::gotoVerwerkingsScherm()
-{
-    ATM->setCurrentIndex(9); //before the money is being dispensed, the GUI will need to receive confirmation from the database first
-                                //the money is being reserved on a special account before the confirmation is sent
-}
 void Login::gotoPreviousPage()
 {
     int tempPreviousIndex;
 
     tempPreviousIndex = getPreviousIndex();
-    ATM->setCurrentIndex(getPreviousIndex());
-    setPreviousIndex(tempPreviousIndex);
+    setPreviousIndex(getPreviousIndex());
+    ATM->setCurrentIndex(tempPreviousIndex);
+
     // go back to previous page
 }
+
+
+
+//#########################PAGES################################################################################################
+
+// go to different screens, many of those will require a lot more. they lack functionality for now.
+
+
+void Login::gotoWelkomScherm()
+{
+    createWelkomScherm();
+    changeATMPage(0);
+    //ATM->setCurrentIndex(0); //end session?
+}
+
+void Login::createWelkomScherm()
+{
+
+
+    buttonContent(welkom_taal_button, tr("languages"));
+    buttonContent(welkom_inlog_button, tr("simulation"));
+    /*if(blocked)
+    {
+        welkom_inlog_button->hide();
+    }
+    */
+}
+
+//Buttons:
+
+
+//-----------------------------------------------------------
+
+void Login::gotoInlogScherm()
+{
+    createInlogScherm();
+    changeATMPage(1);
+}
+
+void Login:: createInlogScherm()
+{
+    buttonContent(inlog_taal_button, tr("languages"));
+    buttonContent(inlog_welkom_button, tr("abort"));
+    buttonContent(inlog_hoofd_button, tr("confirm"));
+
+
+}
+
+
+
+//-----------------------------------------------------------
+
+void Login::gotoTaalScherm()
+{
+    createTaalScherm();
+    changeATMPage(2);
+}
+
+void Login::createTaalScherm(){
+    isDutch = true;
+    TranslateDutch();
+    buttonContent(taal_welkom_button, tr("abort"));
+    buttonContent(taal_hoofd_of_welkom_of_inlog_button, tr("back"));
+    buttonContent(taal_optieDuits_button, "deutsch");
+    buttonContent(taal_optieEngels_button, "english");
+    buttonContent(taal_optieNederlands_button, "nederlands");
+
+}
+
+//----------------------------------------------------------------------------
+
+void Login::gotoHoofdScherm()
+{
+    createHoofdScherm();
+    changeATMPage(3);
+}
+
+void Login:: createHoofdScherm()
+{
+
+    //hoofd_taal_button, hoofd_saldo_button, hoofd_welkom_button, hoofd_pinKeuze_button
+    buttonContent(hoofd_taal_button, tr("languages"));
+    buttonContent(hoofd_saldo_button, tr("balance"));
+    buttonContent(hoofd_snelPinnen_button, tr("get snel pinnen"));
+    buttonContent(hoofd_welkom_button, tr("abort"));
+    buttonContent(hoofd_pinKeuze_button, tr("choose amount"));
+    createSnelPinnenButton();
+
+
+}
+
+void Login::createSnelPinnenButton()
+{
+    //get last 10 transaction amounts pick the one that is pinned the most
+    //if multiple amounts have the same amount use the last 9 etc.. until you get it right
+    //if it is more that the users balance use the highest possible transaction
+
+}
+
+//-----------------------------------------------------------------------------
+
+void Login::gotoSaldoScherm()
+{
+    createSaldoScherm();
+    changeATMPage(4);
+}
+
+void Login:: createSaldoScherm()
+{
+    isDutch = false;
+    TranslateDutch();
+    buttonContent(saldo_welkom_button, tr("abort"));
+    buttonContent(saldo_pinKeuze_button, tr("choose amount"));
+    buttonContent(saldo_hoofdscherm_button, tr("main page"));
+
+    //get saldo and display on GUI
+    //labelContent(saldo_label_wat_is_saldo);
+}
+
+//----------------------------------------------------------------------------------
+
+void Login::gotoPinKeuzeScherm()
+{
+    createPinKeuzeScherm();
+    changeATMPage(5);
+}
+
+void Login:: createPinKeuzeScherm()
+{
+    buttonContent(pinKeuze_hoofd_button, tr("main page"));
+    buttonContent(pinKeuze_welkom_button, tr("abort"));
+    buttonContent(pinKeuze_zelfBedragKiezen_button, tr("pick own amount"));
+
+    //get balance
+    //make 5 different buttons with 5 different values
+    //check if the user has enough balance for each individual value
+    //if not hide the button option (keypad input shouldn't work either)
+}
+
+
+//------------------------------------------------------------------------------
+void Login::gotoBiljetScherm()
+{
+    createBiljetKeuzeScherm();
+    changeATMPage(6);
+}
+
+void Login:: createBiljetKeuzeScherm()
+{
+    buttonContent(biljetKeuze_hoofd_button, tr("main page"));
+    buttonContent(biljetKeuze_welkom_button, tr("abort"));
+    buttonContent(biljetKeuze_biljetNietBelangrijk_button, tr("not important"));
+
+}
+
+
+//------------------------------------------------------------------------------------------
+
+void Login::gotoBedragScherm()
+{
+    createBedragScherm();
+    changeATMPage(7);
+}
+
+void Login:: createBedragScherm()
+{
+    buttonContent(bedragKeuze_hoofd_button, tr("main page"));
+    buttonContent(bedragKeuze_welkom_button, tr("abort"));
+    buttonContent(bedragKeuze_bevestigen_button, tr("confirm"));
+
+}
+
+//-------------------------------------------------------------------------------------------
+
+void Login::gotoBonScherm()
+{
+    createBonScherm();
+    changeATMPage(8);
+}
+
+void Login:: createBonScherm()
+{
+    buttonContent(bon_hoofd_button, tr("main page"));
+    buttonContent(bon_metBon_button, tr("yes"));
+    buttonContent(bon_zonderBon_button, tr("no"));
+    buttonContent(bon_welkom_button, tr("abort"));
+}
+
+//-----------------------------------------------------------------------------------------------
+
+void Login::gotoVerwerkingsScherm()
+{
+    changeATMPage(9);
+                                //the money is being reserved on a special account before the confirmation is sent
+}
+
+void Login:: createVerwerkingsScherm()
+{
+
+}
+
+//###########################ARDUINO################################################################
+
+
+void Login::returnCard()
+{
+    //signal to arduino to return card
+}
+
+
+//###########################DATABASE###########################################################################################
+
+void Login::endSession()
+{
+    //save data
+    //check for left actions to do
+    //disconnect with database
+    gotoWelkomScherm();
+}
+
+void Login::createSession()
+{
+    Data newSession;
+    newSession.getBalance();
+    //connect to database
+    //check if card is at our bank
+    //check if card is at other bank
+    //check if blocked
+}
+
+//----------------------------------------------------------------------------------------------------------
+
+void Login::resetLoginAttempts()
+{
+    //reset login attempts
+}
+
+void Login::increaseLoginAttempts()
+{
+    //increase login attempts
+}
+
+void Login::loginAttempt()
+{
+    //createSession();
+    //if(verifyPincode() == true)
+    //{
+        gotoHoofdScherm();
+    //}
+
+    /*else
+    {
+        //wrongPwMsg();
+        if(checkIfBlocked() == false)
+        {
+            createInlogScherm();
+        }
+        else
+        {
+            endSession();
+        }
+    }
+    */
+}
+//-------------------------------------------------------------------------------------------
+
+bool Login::checkIfBlocked()
+{
+    return false;
+}
+
+void Login::cardBlocked()
+{
+    returnCard();
+    endSession();
+    //your card is blocked message
+    gotoWelkomScherm();
+}
+
+//----------------------------------------------------------------------------------
+
+bool Login::verifyPincode()
+{
+    //pincode = inlog_invoerveldPincode->copy();
+    if(1 == 1){
+        resetLoginAttempts();
+        return true;
+    }
+    else{
+        increaseLoginAttempts();
+        return false;
+    }
+}
+
+
+void Login::TranslateDutch()
+{
+    QTranslator translator;
+    if (isDutch) {
+        translator.load("bank_en_nl", "translations");
+        qApp->installTranslator(&translator);
+        isDutch = true;
+    } else {
+        translator.load("", ""); // Default is english
+        qApp->installTranslator(&translator);
+        isDutch = false;
+    }
+
+    ui->retranslateUi(this);
+    //doReTranslate();
+}
+
+void Login::doReTranslate()
+{
+    //msgbox->setWindowTitle(QObject::tr("ERROR"));
+    //msgbox->setText(QObject::tr("Invalid IP adress"));
+    //pbtn->setText(QObject::tr("Ok"));
+}
+
+
+/*class Session::Session{
+    void Session::startSession()
+    {
+
+    }
+};*/
 
 
 

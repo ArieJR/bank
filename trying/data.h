@@ -1,8 +1,10 @@
 #ifndef DATA_H
 #define DATA_H
+#include "login.h"
+#include "qshareddata.h"
 
 
-class Data
+class Data: public QSharedData
 {
 
     public:

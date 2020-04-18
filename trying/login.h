@@ -15,12 +15,53 @@ protected slots:
     
 public:
     explicit Login(QWidget *parent = nullptr);
+    void doReTranslate();
+
+public slots:
+    void TranslateDutch();
 
 
 private:
-    int previousIndex;
+
+    Ui::Login *ui;
+
+    QString pincode;
+    bool checkIfSession();
+    int previousIndex= 0;
+    void createSession();
+    void cardBlocked();
+    void returnCard();
+    void createWelkomScherm();
+    void createTaalScherm();
+    void buttonContent(QPushButton* textOfButton, const QString &newButtonContent);
+    void createInlogScherm();
+    bool verifyPincode();
+    void resetLoginAttempts();
+    void increaseLoginAttempts();
+    void wrongPassword();
+    void wrongPwMsg();
+    void createHoofdScherm();
+    void createSnelPinnenButton();
+    bool reserveMoney();
+    bool returnReservedMoney();
+    void afbreken();
+    bool checkIfBlocked();
+
+    void createSaldoScherm();
+    void createPinKeuzeScherm();
+    void knopBedrag();
+    void enoughBalance();
+    void createBedragScherm();
+    void createBiljetKeuzeScherm();
+    void doesntmatter();
+    void createBonScherm();
+    void createVerwerkingsScherm();
+    bool isDutch = true;
 
 private slots:
+
+    void loginAttempt();
+    void endSession();
 
     void gotoWelkomScherm(); //0
     void gotoInlogScherm(); //1
@@ -35,8 +76,7 @@ private slots:
     void gotoPreviousPage();
     int getPreviousIndex();
     void setPreviousIndex(int idx);
-    void pincodeCheck();
-    void changeLabel(QLabel* labelToChange, const QString &newLabelContent);
+    void labelContent(QLabel* labelToChange, const QString &newLabelContent);
     void changeATMPage(int idx);
 
 
@@ -45,4 +85,8 @@ private slots:
 //! [1]
 
 #endif
-
+/*class Session: public Login
+{
+public:
+    void startSession();
+};*/
