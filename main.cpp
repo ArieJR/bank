@@ -2,7 +2,6 @@
 #include <iostream>
 #include <QSerialPort>
 #include <QDebug>
-#include <Widget.h>
 #include <QElapsedTimer>
 using namespace std;
 QSerialPort serial;
