@@ -1,0 +1,13 @@
+#ifndef CREATEWELKOMSCHERM_H
+#define CREATEWELKOMSCHERM_H
+
+
+class createWelkomScherm
+{
+public:
+    createWelkomScherm();
+};
+
+//
+
+#endif // CREATEWELKOMSCHERM_H
