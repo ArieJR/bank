@@ -16,11 +16,12 @@ HEADERS += \
     data.h \
     login.h
 
-TRANSLATIONS =  bank_en_nl.qph
-
 
 FORMS += \
     login.ui
+
+DISTFILES += \
+    bank_en_nl.qm
 
 
 

@@ -3,7 +3,7 @@
 
 #include <QTranslator>
 #include "ui_login.h"
-#include "data.h"
+//#include "data.h"
 
 class Login : public QWidget, private Ui::Login
 {
@@ -24,8 +24,13 @@ public slots:
 private:
 
     Ui::Login *ui;
-
+    float balance;
     QString pincode;
+    int numberFailedLogins;
+    int numberOf50Notes;
+    int numberOf20Notes;
+    int numberOf10Notes;
+
     bool checkIfSession();
     int previousIndex= 0;
     void createSession();
@@ -35,7 +40,6 @@ private:
     void createTaalScherm();
     void buttonContent(QPushButton* textOfButton, const QString &newButtonContent);
     void createInlogScherm();
-    bool verifyPincode();
     void resetLoginAttempts();
     void increaseLoginAttempts();
     void wrongPassword();
@@ -46,30 +50,33 @@ private:
     bool returnReservedMoney();
     void afbreken();
     bool checkIfBlocked();
-
+    QString const getBalance();
     void createSaldoScherm();
     void createPinKeuzeScherm();
     void knopBedrag();
     void enoughBalance();
     void createBedragScherm();
-    void createBiljetKeuzeScherm();
+    void createBiljetKeuzeScherm(int withdrawAmount);
     void doesntmatter();
     void createBonScherm();
     void createVerwerkingsScherm();
+    bool verifyPincode();
+    bool fastPin();
+    bool checkBalance(float checkBal);
     bool isDutch = true;
 
 private slots:
 
     void loginAttempt();
     void endSession();
-
-    void gotoWelkomScherm(); //0
+    void confirmWithdrawAmount();
     void gotoInlogScherm(); //1
     void gotoTaalScherm(); //2
     void gotoHoofdScherm(); //3
     void gotoSaldoScherm(); //4
     void gotoPinKeuzeScherm(); //5
-    void gotoBiljetScherm(); //6
+    void gotoBiljetScherm(int withdrawAmount); //6
+    void gotoBiljetScherm();
     void gotoBedragScherm(); //7
     void gotoBonScherm(); //8
     void gotoVerwerkingsScherm(); //9
@@ -79,6 +86,8 @@ private slots:
     void labelContent(QLabel* labelToChange, const QString &newLabelContent);
     void changeATMPage(int idx);
 
+public slots:
+    void gotoWelkomScherm(); //0
 
 
 };
