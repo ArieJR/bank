@@ -544,6 +544,8 @@ void Login::confirmWithdrawAmount()
         }
         QString errorMessage = QString("Error: %1 and %2").arg(wrongMult).arg(notEnoughBalance);
         labelContent(bedragKeuze_error_label, errorMessage);
+        bedragKeuze_invoerVeld->clear();
+
         return;
 
     }
