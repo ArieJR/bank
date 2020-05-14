@@ -1,0 +1,51 @@
+<!DOCTYPE QPH>
+<QPH language="nl_NL" sourcelanguage="en_GB">
+<phrase>
+    <source>languages</source>
+    <target>talen</target>
+</phrase>
+<phrase>
+    <source>simulation</source>
+    <target>simulatie</target>
+</phrase>
+<phrase>
+    <source>abort</source>
+    <target>afbreken</target>
+</phrase>
+<phrase>
+    <source>confirm</source>
+    <target>bevestigen</target>
+</phrase>
+<phrase>
+    <source>back</source>
+    <target>terug</target>
+</phrase>
+<phrase>
+    <source>balance</source>
+    <target>saldo</target>
+</phrase>
+<phrase>
+    <source>choose amount</source>
+    <target>kies hoeveelheid</target>
+</phrase>
+<phrase>
+    <source>main page</source>
+    <target>hoofdscherm</target>
+</phrase>
+<phrase>
+    <source>not important</source>
+    <target>niet belangrijk</target>
+</phrase>
+<phrase>
+    <source>yes</source>
+    <target>ja</target>
+</phrase>
+<phrase>
+    <source>no</source>
+    <target>nee</target>
+</phrase>
+<phrase>
+    <source>(New Entry)</source>
+    <target></target>
+</phrase>
+</QPH>
