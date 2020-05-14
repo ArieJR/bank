@@ -66,8 +66,6 @@ void blokeerPas()
     //UPDATE `ANVI`.`Pas` SET `Pas_geblokkeerd` = 1 WHERE (Rekeningnummer='DU99ANVI4445556667');
 }
 
-
-
 void sessieEind()
 {
     //huidigeSessieId
@@ -75,9 +73,20 @@ void sessieEind()
 }
 
 
-void getBriefgeldAantal();
+void getBriefgeldAantal()
+{
+    //biljet10, biljet20, biljet50;
+    //SELECT Biljet10 FROM Automaat WHERE Automaat_ID = "Pin_School";
+    //SELECT Biljet20 FROM Automaat WHERE Automaat_ID = "Pin_School";
+    //SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
+}
 
-void setNewBalance();
+void setNewBalance()
+{
+    //rekeningnummer, bedragGepind
+    //UPDATE `ANVI`.`Rekening` SET `Saldo` = '400' WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+}
+
 float getBalance();
 float getAmountWithdrawnToday(); //maximaal bedrag dat valt te pinnen per dag?
 

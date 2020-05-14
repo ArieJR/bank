@@ -52,5 +52,11 @@ UPDATE `ANVI`.`Sessie` SET `Uitlog_tijd` = CURRENT_TIMESTAMP WHERE (`Session_ID`
 #UPDATE  `ANVI`.`Pas` SET case when 3=(SELECT Aantal_foutpogingen FROM Pas WHERE (Rekeningnummer='DU99ANVI4445556667')) then `Pas_geblokkeerd` = 1 WHERE (Rekeningnummer='DU99ANVI4445556667');
 
 
+#biljetten aantal
+SELECT Biljet10 FROM Automaat WHERE Automaat_ID = "Pin_School";
+SELECT Biljet20 FROM Automaat WHERE Automaat_ID = "Pin_School";
+SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
 
+#saldo aanpassen
+UPDATE `ANVI`.`Rekening` SET `Saldo` = -00 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
 

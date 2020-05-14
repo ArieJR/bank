@@ -51,6 +51,7 @@ private:
 
     float balance;
     float withdrawnToday;
+    float bedragGepind;
 
 };
 
