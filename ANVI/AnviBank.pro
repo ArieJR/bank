@@ -7,18 +7,19 @@ TEMPLATE = app
 TARGET = Bank
 
 QT = core gui \
-    widgets
+    widgets \
+    core        #inti test
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
-    data.cpp \
+    database.cpp \
     login.cpp \
     main.cpp
 
 HEADERS += \
-    data.h \
+    database.h \
     login.h
 
 

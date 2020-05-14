@@ -3,10 +3,9 @@
 #include <QLineEdit>
 //#include "createScherm.h"
 #include "QListWidgetItem"
-#include "data.h"
 #include "qstring.h"
 
-
+#include "database.h"
 
 
 //! [0]
@@ -17,6 +16,7 @@ Login::Login(QWidget *parent)
 
 
 {
+    gebruikDatabase = new database();
 
     setupUi(this);
     balance = 100.00;
@@ -107,7 +107,7 @@ Login::Login(QWidget *parent)
     connect(bon_metBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
     connect(bon_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
     connect(bon_zonderBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
-    buttonContent(bon_hoofd_button, tr("main page"));
+    buttonContent(bon_hoofd_button, tr("test page"));
     buttonContent(bon_metBon_button, tr("yes"));
     buttonContent(bon_zonderBon_button, tr("no"));
     buttonContent(bon_welkom_button, tr("abort"));
@@ -115,6 +115,24 @@ Login::Login(QWidget *parent)
 
 
 }
+
+void Login::gotoTestScherm()     //inti test
+{
+    createTestScherm();
+    changeATMPage(8);
+}
+
+void Login:: createTestScherm()      //inti test
+{
+    QString tekst = gebruikDatabase->teruggave();
+    QByteArray omzetArray = tekst.toLocal8Bit();
+    const char *tekstChar = omzetArray.data();
+    buttonContent(bon_hoofd_button, tr(tekstChar));
+    buttonContent(bon_metBon_button, tr("yes"));
+    buttonContent(bon_zonderBon_button, tr("no"));
+    buttonContent(bon_welkom_button, tr("abort"));
+}
+
 
 //#######################CHANGE CONTAINER MESSAGE##########################################################################################################################
 
@@ -394,7 +412,7 @@ void Login::gotoBonScherm()
 
 void Login:: createBonScherm()
 {
-    buttonContent(bon_hoofd_button, tr("main page"));
+    buttonContent(bon_hoofd_button, tr("Main page"));
     buttonContent(bon_metBon_button, tr("yes"));
     buttonContent(bon_zonderBon_button, tr("no"));
     buttonContent(bon_welkom_button, tr("abort"));
@@ -586,15 +604,15 @@ void Login::confirmWithdrawAmount()
         if(amount%10!=0)
         {
             //wrongMult = true;
-            QString wrongMult = QString("wrong multiplier");
+            QString wrongMult = QString(tr("wrong multiplier"));
         }
         if(checkBalance(amount) != true)
         {
             //notEnoughBalance = true;
-            QString notEnoughBalance = QString("not enough balance");
+            QString notEnoughBalance = QString(tr("not enough balance"));
 
         }
-        QString errorMessage = QString("Error: %1 and %2").arg(wrongMult).arg(notEnoughBalance);
+        QString errorMessage = QString(tr("Error: %1 and %2")).arg(wrongMult).arg(notEnoughBalance);
         labelContent(bedragKeuze_error_label, errorMessage);
         return;
 

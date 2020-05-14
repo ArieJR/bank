@@ -1,9 +1,7 @@
 #include "login.h"
 #include <qtranslator.h>
-//#include "data.h"
 #include <QApplication>
 //#include <QSerialPort>
-
 
 //! [0]
 int main(int argc, char *argv[])

@@ -25,6 +25,9 @@ SELECT Gebruikers_ID FROM Rekening WHERE Rekeningnummer='DU99ANVI4445556667';
 INSERT INTO `ANVI`.`Sessie` (`         Automaat_ID`, `Pas_ID`, `Gebruikers_ID`, `Rekeningnummer`)
 VALUES ('Pin_School', 'CHUAN', '3', 'DU99ANVI4445556667');
 
+#laatste session_ID te krijgen
+SELECT MAX(Session_ID) FROM Sessie;
+
 #password (true or false)
 SELECT case when 1234=(SELECT Pincode FROM Pas WHERE Rekeningnummer='DU99ANVI4445556667') then 1 else 0 end as bool FROM Pas;
 

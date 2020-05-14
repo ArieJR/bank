@@ -6,7 +6,7 @@
 #include "data.h"
 #include "qstring.h"
 
-
+#include "database.h"
 
 
 //! [0]
@@ -17,6 +17,7 @@ Login::Login(QWidget *parent)
 
 
 {
+    rootItem = new database();        //inti test
 
     setupUi(this);
     balance = 100.00;
@@ -57,7 +58,7 @@ Login::Login(QWidget *parent)
 
     connect(hoofd_pinKeuze_button, SIGNAL (released()), this, SLOT (gotoPinKeuzeScherm()));
     connect(hoofd_saldo_button, SIGNAL (released()), this, SLOT (gotoSaldoScherm()));
-    connect(hoofd_snelPinnen_button, SIGNAL (released()), this, SLOT (gotoBonScherm()));
+    connect(hoofd_snelPinnen_button, SIGNAL (released()), this, SLOT (gotoTestScherm()));      //inti test
     connect(hoofd_taal_button, SIGNAL (released()), this, SLOT (gotoTaalScherm()));
     connect(hoofd_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
     buttonContent(hoofd_taal_button, tr("languages"));
@@ -107,7 +108,7 @@ Login::Login(QWidget *parent)
     connect(bon_metBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
     connect(bon_welkom_button, SIGNAL (released()), this, SLOT (endSession()));
     connect(bon_zonderBon_button, SIGNAL (released()), this, SLOT (gotoVerwerkingsScherm()));
-    buttonContent(bon_hoofd_button, tr("main page"));
+    buttonContent(bon_hoofd_button, tr("test page"));
     buttonContent(bon_metBon_button, tr("yes"));
     buttonContent(bon_zonderBon_button, tr("no"));
     buttonContent(bon_welkom_button, tr("abort"));
@@ -115,6 +116,22 @@ Login::Login(QWidget *parent)
 
 
 }
+
+void Login::gotoTestScherm()     //inti test
+{
+    createTestScherm();
+    changeATMPage(8);
+}
+
+void Login:: createTestScherm()      //inti test
+{
+    rootItem->teruggave()
+    buttonContent(bon_hoofd_button, tr("ho"));
+    buttonContent(bon_metBon_button, tr("yes"));
+    buttonContent(bon_zonderBon_button, tr("no"));
+    buttonContent(bon_welkom_button, tr("abort"));
+}
+
 
 //#######################CHANGE CONTAINER MESSAGE##########################################################################################################################
 
@@ -394,7 +411,7 @@ void Login::gotoBonScherm()
 
 void Login:: createBonScherm()
 {
-    buttonContent(bon_hoofd_button, tr("main page"));
+    buttonContent(bon_hoofd_button, tr("Main page"));
     buttonContent(bon_metBon_button, tr("yes"));
     buttonContent(bon_zonderBon_button, tr("no"));
     buttonContent(bon_welkom_button, tr("abort"));

@@ -3,7 +3,8 @@
 
 #include <QTranslator>
 #include "ui_login.h"
-//#include "data.h"
+
+class database;     //inti test
 
 class Login : public QWidget, private Ui::Login
 {
@@ -65,6 +66,10 @@ private:
     bool checkBalance(float checkBal);
     bool isDutch = true;
 
+    void createTestScherm();  //inti test
+
+    database *gebruikDatabase;
+
 private slots:
 
     void loginAttempt();
@@ -85,6 +90,8 @@ private slots:
     void setPreviousIndex(int idx);
     void labelContent(QLabel* labelToChange, const QString &newLabelContent);
     void changeATMPage(int idx);
+
+    void gotoTestScherm(); //inti test
 
 public slots:
     void gotoWelkomScherm(); //0
