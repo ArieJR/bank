@@ -560,14 +560,13 @@ void Login::doReTranslate()
 QString const Login::getBalance()
 {
     QString bal;
-    //bal.setNum(balance);
     bal.setNum(gebruikDatabase->getBalance());
     return bal;
 }
 
 bool Login::fastPin()
 {
-    if(balance>= 70.00)
+    if(gebruikDatabase->getBalance()>= 70.00)
     {
         return true;
     }
@@ -578,7 +577,7 @@ bool Login::fastPin()
 
 bool Login::checkBalance(float checkBal)
 {
-    if(balance >= checkBal)
+    if(gebruikDatabase->getBalance() >= checkBal)
     {
         return true;
     }

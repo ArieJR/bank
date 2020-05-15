@@ -19,7 +19,7 @@
 
 
 #in rekening kijken welke gebruiker_ID bij rekeningnummer hoort
-SELECT Gebruikers_ID FROM Rekening WHERE Rekeningnummer='DU99ANVI4445556667';
+SELECT Gebruikers_ID FROM Rekening WHERE Rekeningnummer='DU-ANVI-12345600';
 
 #Slaat Pas_ID, rekeningnummer en Automaat_ID op in sessie
 INSERT INTO `ANVI`.`Sessie` (`         Automaat_ID`, `Pas_ID`, `Gebruikers_ID`, `Rekeningnummer`)
@@ -66,3 +66,5 @@ SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
 #verlaag briefjes
 UPDATE `ANVI`.`Automaat` SET `Biljet50` = `Biljet50`-3 WHERE (`Automaat_ID` = 'Pin_School');
 
+
+SELECT Pas_ID FROM Sessie WHERE;
