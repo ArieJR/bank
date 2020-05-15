@@ -560,7 +560,8 @@ void Login::doReTranslate()
 QString const Login::getBalance()
 {
     QString bal;
-    bal.setNum(balance);
+    //bal.setNum(balance);
+    bal.setNum(gebruikDatabase->getBalance());
     return bal;
 }
 

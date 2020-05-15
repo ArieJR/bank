@@ -57,6 +57,12 @@ SELECT Biljet10 FROM Automaat WHERE Automaat_ID = "Pin_School";
 SELECT Biljet20 FROM Automaat WHERE Automaat_ID = "Pin_School";
 SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
 
-#saldo aanpassen
-UPDATE `ANVI`.`Rekening` SET `Saldo` = -00 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+#saldo aanpassen naar beneden (voor veiligheid alleen naar beneden kunnnen)
+UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+
+#pak saldo
+SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
+
+#verlaag briefjes
+UPDATE `ANVI`.`Automaat` SET `Biljet50` = `Biljet50`-3 WHERE (`Automaat_ID` = 'Pin_School');
 

@@ -53,6 +53,10 @@ private:
     float withdrawnToday;
     float bedragGepind;
 
+    float bedragInAutomaat;
+    float biljet10InAutomaat;
+    float biljet20InAutomaat;
+    float biljet50InAutomaat;
 };
 
 #endif // DATABASE_H
