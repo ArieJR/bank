@@ -4,8 +4,11 @@
 //#include "createScherm.h"
 #include "QListWidgetItem"
 #include "qstring.h"
-
 #include "database.h"
+
+#include <QLabel>
+#include <QFrame>
+
 
 
 //! [0]
@@ -107,25 +110,14 @@ Login::Login(QWidget *parent)
     buttonContent(bon_welkom_button, tr("abort"));
 
 
-
 }
 
-void Login::gotoTestScherm()     //inti test
-{
-    createTestScherm();
-    changeATMPage(8);
-}
 
-void Login:: createTestScherm()      //inti test
-{
-    QString tekst = gebruikDatabase->teruggave();
-    QByteArray omzetArray = tekst.toLocal8Bit();
-    const char *tekstChar = omzetArray.data();
-    buttonContent(bon_hoofd_button, tr(tekstChar));
-    buttonContent(bon_metBon_button, tr("yes"));
-    buttonContent(bon_zonderBon_button, tr("no"));
-    buttonContent(bon_welkom_button, tr("abort"));
-}
+//test Q string omzetten naar const char (kan nog wel is handig zijn)
+//    QString tekst = gebruikDatabase->teruggave();
+//    QByteArray omzetArray = tekst.toLocal8Bit();
+//    const char *tekstChar = omzetArray.data();
+//    buttonContent(bon_hoofd_button, tr(tekstChar));
 
 
 //#######################CHANGE CONTAINER MESSAGE##########################################################################################################################
@@ -205,8 +197,21 @@ void Login::createWelkomScherm()
 
 void Login::gotoInlogScherm()
 {
-    createInlogScherm();
-    changeATMPage(1);
+    if(gebruikDatabase->checkGeblokkeerd())
+    {
+        //melding pas geblokkeerd
+
+        errorMethod();
+    }
+    else
+    {
+        createInlogScherm();
+        changeATMPage(1);
+        QLabel *label = new QLabel(this);
+        label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        label->setText("first line\nsecond line");
+        label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    }
 }
 
 void Login:: createInlogScherm()
@@ -446,8 +451,8 @@ void Login::endSession()
 
 void Login::createSession()
 {
-
-    //Data newSession;
+    gebruikDatabase->checkGebruikersId();
+    gebruikDatabase->sessieStart();     //Data newSession;
     //newSession.getBalanceString();
     //connect to database
     //check if card is at our bank
@@ -600,12 +605,11 @@ void Login::confirmWithdrawAmount()
 
 }
 
-/*class Session::Session{
-    void Session::startSession()
-    {
 
-    }
-};*/
-
-
-
+void Login::errorMethod()
+{
+    QLabel *label = new QLabel(this);
+    label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    label->setText("first line\nsecond line");
+    label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+}

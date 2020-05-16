@@ -122,7 +122,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -305,7 +305,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -329,7 +329,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/Afbeelding1.png</pixmap>
+      <pixmap>Afbeelding1.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -580,7 +580,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/duitsland_100.png</pixmap>
+      <pixmap>duitsland_100.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -599,7 +599,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/engeland_100.png</pixmap>
+      <pixmap>engeland_100.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -618,7 +618,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/nederland_100.png</pixmap>
+      <pixmap>nederland_100.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -655,7 +655,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -955,7 +955,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1224,7 +1224,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1545,7 +1545,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -1901,7 +1901,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2159,7 +2159,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2380,7 +2380,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -2528,7 +2528,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../../plaatjes/ANVI_LOGO_200PIX.png</pixmap>
+      <pixmap>ANVI_LOGO.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>

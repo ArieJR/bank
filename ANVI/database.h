@@ -52,7 +52,7 @@ private:
     int biljet20;
     int biljet10;
 
-    float balance;
+    float balance = 200;
     float withdrawnToday;
     float bedragGepind;
 

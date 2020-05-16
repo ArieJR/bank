@@ -126,15 +126,13 @@ void database::setNewBalance(float bedragGepind)
 {
     //rekeningnummer, bedragGepind
     //UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
-    balance = 200;      //hard
+    balance -= bedragGepind;      //hard
 }
 
 float database::getBalance()
 {
     //balance, rekeningnummer
     //SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
-
-    setNewBalance(10);    //hard
     return balance;
 }
 

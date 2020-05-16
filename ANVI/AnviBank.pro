@@ -27,4 +27,10 @@ FORMS += \
     login.ui
 
 DISTFILES += \
-    bank_en_nl.qm
+    ANVI_LOGO.png \
+    ANVI_LOGO_200.png \
+    Afbeelding1.png \
+    bank_en_nl.qm \
+    duitsland_100.png \
+    engeland_100.png \
+    nederland_100.png
