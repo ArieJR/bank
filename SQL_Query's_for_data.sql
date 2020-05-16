@@ -66,5 +66,5 @@ SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
 #verlaag briefjes
 UPDATE `ANVI`.`Automaat` SET `Biljet50` = `Biljet50`-3 WHERE (`Automaat_ID` = 'Pin_School');
 
-
-SELECT Pas_ID FROM Sessie WHERE;
+#sessie pintransacties van afgelopen dag van iemand optellen
+SELECT SUM(Bedrag_actie) FROM ANVI.Sessie WHERE (Aanmeld_tijd BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 1 DAY) AND current_timestamp()) AND Rekeningnummer = 'DU-ANVI-12345656' AND Actie = 'Pin';

@@ -37,7 +37,7 @@
     <enum>QFrame::Panel</enum>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="welkomScherm">
     <widget class="QPushButton" name="welkom_taal_button">

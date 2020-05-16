@@ -17,53 +17,74 @@ QString database::teruggave()
 void database::checkGebruikersId()
 {
     //gebruikersId, rekeningnummer
-    //SELECT Gebruikers_ID FROM Rekening WHERE Rekeningnummer='DU99ANVI4445556667';
+    //SELECT Gebruikers_ID FROM ANVI.Rekening WHERE Rekeningnummer='DU99ANVI4445556667';
 }
 
 //Slaat Pas_ID, rekeningnummer en Automaat_ID op in sessie
 void database::sessieStart()
 {
     //pasId, rekeningnummer, automaatId, rekeningnummer
-    //INSERT INTO `ANVI`.`Sessie` (`         Automaat_ID`, `Pas_ID`, `Gebruikers_ID`, `Rekeningnummer`) VALUES ('Pin_School', 'CHUAN', '3', 'DU99ANVI4445556667');
+    //INSERT INTO `ANVI`.`Sessie` (`Automaat_ID`, `Pas_ID`, `Gebruikers_ID`, `Rekeningnummer`) VALUES ('Pin_School', 'CHUAN', '3', 'DU99ANVI4445556667');
 
     //huidigeSessieId
-    //SELECT MAX(Session_ID) FROM Sessie;
+    //SELECT MAX(Session_ID) FROM ANVI.Sessie;
 }
 
-void database::checkPassword()
+
+bool database::checkPassword(QString pincodeIngevoerd) //gehashed
 {
     //pincodeIngevoerd, pincode, rekeningnummer
-    //SELECT case when 1234=(SELECT Pincode FROM Pas WHERE Rekeningnummer='DU99ANVI4445556667') then 1 else 0 end as bool FROM Pas;
+    //SELECT case when 1234=(SELECT Pincode FROM Pas WHERE Rekeningnummer='DU99ANVI4445556667') then 1 else 0 end as bool FROM ANVI.Pas;
+
+    if(pincodeIngevoerd == "1234")      //hard
+    {
+        pincode = true;
+    }
+    else
+    {
+        pincode = false;
+    }
+
+    return pincode;
 }
 
-void database::checkGeblokkeerd()
+bool database::checkGeblokkeerd()
 {
     //pasGeblokkeerd, rekeningnummer
-    //SELECT Pas_geblokkeerd FROM Pas WHERE Rekeningnummer='DU99ANVI4445556667';	#(true of false terug)
+    //SELECT Pas_geblokkeerd FROM ANVI.Pas WHERE Rekeningnummer='DU99ANVI4445556667';	#(true of false terug)
+    return pasGeblokkeerd;
 }
 
 void database::pogingReset()
 {
     //rekeningnummer
     //UPDATE `ANVI`.`Pas` SET `Aantal_foutpogingen` = '0' WHERE (Rekeningnummer='DU99ANVI4445556667');
+
+    aantalFoutpogingen = 0;     //hard
 }
 
 void database::pogingOmhoog()
 {
     //rekeningnummer
     //UPDATE `ANVI`.`Pas` SET `Aantal_foutpogingen` = `Aantal_foutpogingen`+1 WHERE (Rekeningnummer='DU99ANVI4445556667');
+
+    aantalFoutpogingen++;       //hard
 }
 
-void database::checkPogingen()
+int database::checkPogingen()
 {
     //aantalFoutpogingen, rekeningnummer
-    //SELECT Aantal_foutpogingen FROM Pas WHERE (Rekeningnummer='DU99ANVI4445556667');
+    //SELECT Aantal_foutpogingen FROM ANVI.Pas WHERE (Rekeningnummer='DU99ANVI4445556667');
+
+    return aantalFoutpogingen;
 }
 
 void database::blokeerPas()
 {
     //rekeningnummer
     //UPDATE `ANVI`.`Pas` SET `Pas_geblokkeerd` = 1 WHERE (Rekeningnummer='DU99ANVI4445556667');
+
+    pasGeblokkeerd= true;       //hard
 }
 
 void database::sessieEind()
@@ -73,31 +94,56 @@ void database::sessieEind()
 }
 
 
-void database::getBriefgeldAantal()
+int database::get50BriefgeldAantal()
 {
-    //biljet10, biljet20, biljet50;
-    //SELECT Biljet10 FROM Automaat WHERE Automaat_ID = "Pin_School";
-    //SELECT Biljet20 FROM Automaat WHERE Automaat_ID = "Pin_School";
-    //SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
+    //biljet50;
+    //SELECT Biljet50 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
+
+    biljet50 = 20;       //hard
+    return biljet50;
 }
 
-void database::setNewBalance()
+int database::get20BriefgeldAantal()
+{
+    //biljet20;
+    //SELECT Biljet20 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
+
+    biljet20 = 20;       //hard
+    return biljet20;
+}
+
+int database::get10BriefgeldAantal()
+{
+    //biljet10;
+    //SELECT Biljet10 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
+
+    biljet10 = 20;       //hard
+    return biljet10;
+}
+
+
+void database::setNewBalance(float bedragGepind)
 {
     //rekeningnummer, bedragGepind
     //UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+    balance = 200;      //hard
 }
 
 float database::getBalance()
 {
-    balance = 30.0; //balance, rekeningnummer
-    //SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
+    //balance, rekeningnummer
+    //SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
+
+    setNewBalance(10);    //hard
     return balance;
 }
 
-//maximaal bedrag dat valt te pinnen per dag?
+//maximaal bedrag dat valt te pinnen per dag checken
 float database::getAmountWithdrawnToday()
 {
-    /* sql querys voor balance afgelopen sessies */
+    //rekeningnummer, withdrawnToday
+    //SELECT SUM(Bedrag_actie) FROM ANVI.Sessie WHERE (Aanmeld_tijd BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 1 DAY) AND current_timestamp()) AND Rekeningnummer = 'DU-ANVI-12345656' AND Actie = 'Pin';
+    withdrawnToday = 200;   //hard
     return withdrawnToday;
 }
 
@@ -120,10 +166,10 @@ void database::verlaag10Briefjes(int numberOfNotes)
 }
 
 float database::getTotaalGeldInATM()
-{
-    biljet10InAutomaat = 10;//automaatId //SELECT Biljet10 FROM Automaat WHERE Automaat_ID = "Pin_School";
-    biljet20InAutomaat = 10;//automaatId //SELECT Biljet20 FROM Automaat WHERE Automaat_ID = "Pin_School";
-    biljet50InAutomaat = 10;//automaatId //SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
+{       //hard
+    biljet10InAutomaat = 10;//automaatId //SELECT Biljet10 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
+    biljet20InAutomaat = 10;//automaatId //SELECT Biljet20 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
+    biljet50InAutomaat = 10;//automaatId //SELECT Biljet50 FROM ANVI.Automaat WHERE Automaat_ID = "Pin_School";
     bedragInAutomaat = biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
     return bedragInAutomaat;
 }

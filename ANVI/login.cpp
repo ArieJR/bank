@@ -19,12 +19,6 @@ Login::Login(QWidget *parent)
     gebruikDatabase = new database();
 
     setupUi(this);
-    balance = 100.00;
-    pincode = "1234";
-    numberFailedLogins = 0;
-    numberOf10Notes = 100;
-    numberOf20Notes = 100;
-    numberOf50Notes = 100;
 
 
     TranslateDutch();
@@ -292,7 +286,7 @@ void Login:: createSaldoScherm()
     buttonContent(saldo_welkom_button, tr("abort"));
     buttonContent(saldo_pinKeuze_button, tr("choose amount"));
     buttonContent(saldo_hoofdscherm_button, tr("main page"));
-    labelContent(saldo_label, getBalance());
+    labelContent(saldo_label, getBalanceString());
 
     //get saldo and display on GUI
     //labelContent(saldo_label_wat_is_saldo);
@@ -454,7 +448,7 @@ void Login::createSession()
 {
 
     //Data newSession;
-    //newSession.getBalance();
+    //newSession.getBalanceString();
     //connect to database
     //check if card is at our bank
     //check if card is at other bank
@@ -462,18 +456,6 @@ void Login::createSession()
 }
 
 //----------------------------------------------------------------------------------------------------------
-
-void Login::resetLoginAttempts()
-{
-    numberFailedLogins = 0;
-    return;
-}
-
-void Login::increaseLoginAttempts()
-{
-    numberFailedLogins++;
-    return;
-}
 
 void Login::loginAttempt()
 {
@@ -486,12 +468,14 @@ void Login::loginAttempt()
     else
     {
         //wrongPwMsg();
-        if(checkIfBlocked() == false)
+        if(gebruikDatabase->checkGeblokkeerd() == false)
         {
             createInlogScherm();
         }
         else
         {
+            returnCard();
+            //your card is blocked message
             endSession();
         }
     }
@@ -499,32 +483,24 @@ void Login::loginAttempt()
 }
 //-------------------------------------------------------------------------------------------
 
-bool Login::checkIfBlocked()
-{
-    return false;
-}
-
-void Login::cardBlocked()
-{
-    returnCard();
-    endSession();
-    //your card is blocked message
-    gotoWelkomScherm();
-}
-
 //----------------------------------------------------------------------------------
 
 bool Login::verifyPincode()
 {
-    if(pincode == inlog_invoerveldPincode->text()){
-        resetLoginAttempts();
+    if(gebruikDatabase->checkPassword(inlog_invoerveldPincode->text()))
+    {
+        gebruikDatabase->pogingReset();
         inlog_invoerveldPincode->clear();
         return true;
     }
-    else{
-        increaseLoginAttempts();
+    else
+    {
+        gebruikDatabase->pogingOmhoog();
         inlog_invoerveldPincode->clear();
-
+        if(gebruikDatabase->checkPogingen() >= 3)
+        {
+            gebruikDatabase->blokeerPas();
+        }
         return false;
     }
 }
@@ -534,11 +510,14 @@ bool Login::verifyPincode()
 void Login::TranslateDutch()
 {
     QTranslator translator;
-    if (isDutch) {
+    if (isDutch)
+    {
         translator.load("bank_en_nl.qm", "");
         qApp->installTranslator(&translator);
         isDutch = true;
-    } else {
+    }
+    else
+    {
         translator.load("", ""); // Default is english
         qApp->installTranslator(&translator);
         isDutch = false;
@@ -557,7 +536,7 @@ void Login::doReTranslate()
 
 //#####################################################################################################################
 
-QString const Login::getBalance()
+QString const Login::getBalanceString()
 {
     QString bal;
     bal.setNum(gebruikDatabase->getBalance());
@@ -570,7 +549,8 @@ bool Login::fastPin()
     {
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }
@@ -595,7 +575,8 @@ void Login::confirmWithdrawAmount()
 
 
     int amount = (bedragKeuze_invoerVeld->text()).toInt();
-    if(amount%10==0 && checkBalance(amount) == true){
+    if(amount%10==0 && checkBalance(amount) == true)
+    {
         bedragKeuze_invoerVeld->clear();
         gotoBiljetScherm(amount);
     }
@@ -615,7 +596,6 @@ void Login::confirmWithdrawAmount()
         QString errorMessage = QString(tr("Error: %1 and %2")).arg(wrongMult).arg(notEnoughBalance);
         labelContent(bedragKeuze_error_label, errorMessage);
         return;
-
     }
 
 }

@@ -12,17 +12,20 @@ public:
 
     void checkGebruikersId();
     void sessieStart();
-    void checkPassword();
-    void checkGeblokkeerd();
+
+    bool checkPassword(QString pincodeIngevoerd);
+    bool checkGeblokkeerd();
     void pogingReset();
     void pogingOmhoog();
-    void checkPogingen();
+    int checkPogingen();
     void blokeerPas();
     void sessieEind();
 
-    void getBriefgeldAantal();
+    int get50BriefgeldAantal();
+    int get20BriefgeldAantal();
+    int get10BriefgeldAantal();
 
-    void setNewBalance();
+    void setNewBalance(float bedragGepind);
     float getBalance();
     float getAmountWithdrawnToday(); //maximaal bedrag dat valt te pinnen per dag?
 
@@ -40,9 +43,9 @@ private:
     QString rekeningnummer;
     QString automaatId;
     int huidigeSessieId;
-    int pincodeIngevoerd; //gehashed
+
     bool pincode;
-    bool pasGeblokkeerd;
+    bool pasGeblokkeerd = false;    //hard
     int aantalFoutpogingen;
 
     int biljet50;

@@ -25,12 +25,6 @@ public slots:
 private:
 
     Ui::Login *ui;
-    float balance;
-    QString pincode;
-    int numberFailedLogins;
-    int numberOf50Notes;
-    int numberOf20Notes;
-    int numberOf10Notes;
 
     bool checkIfSession();
     int previousIndex= 0;
@@ -50,8 +44,7 @@ private:
     bool reserveMoney();
     bool returnReservedMoney();
     void afbreken();
-    bool checkIfBlocked();
-    QString const getBalance();
+    QString const getBalanceString();
     void createSaldoScherm();
     void createPinKeuzeScherm();
     void knopBedrag();
