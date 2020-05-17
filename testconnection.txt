@@ -1,0 +1,95 @@
+void Login::connectArduino(){
+    QString arduinoName;
+    arduinoName = "";
+    arduino = new QSerialPort;
+    int arduino_uno_vendor_id = 6790;
+    int arduino_uno_product_id = 29987;
+//
+/*  find de PID en VID Als jij dat niet weet als het een nieuwe arduino is
+    qDebug() << "Number of available ports: " << QSerialPortInfo::availablePorts().length();
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        qDebug() << "Has vendor ID: " << serialPortInfo.hasVendorIdentifier();
+        if(serialPortInfo.hasVendorIdentifier())
+        {
+            qDebug() << "Vendor ID: " << serialPortInfo.vendorIdentifier();
+        }
+        qDebug() << "Has Product ID: " << serialPortInfo.hasProductIdentifier();
+        if(serialPortInfo.hasProductIdentifier())
+        {
+            qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
+        }
+        arduino_uno_vendor_id = serialPortInfo.vendorIdentifier();
+        arduino_uno_product_id = serialPortInfo.productIdentifier();
+    }
+*/
+//  vergelijk de id of het goeie arduino is
+    foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+    {
+        if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier())
+        {
+            if(serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id)
+            {
+                if(serialPortInfo.productIdentifier() == arduino_uno_product_id)
+                {
+                    arduinoName = serialPortInfo.portName();
+                    arduinoAvailable = true;
+                }
+            }
+        }
+    }
+    if(arduinoAvailable){
+        // open and configure the serialport
+        //connect arduino
+        arduino->setPortName(arduinoName);      //port naam kan ook bijv.(COM 3)
+        arduino->open(QSerialPort::ReadWrite);
+        arduino->setBaudRate(QSerialPort::Baud9600);
+        arduino->setDataBits(QSerialPort::Data8);
+        arduino->setParity(QSerialPort::NoParity);
+        arduino->setStopBits(QSerialPort::OneStop);
+        arduino->setFlowControl(QSerialPort::NoFlowControl);
+        qDebug() << "Arduino verbonden.\n";
+        trigger3 = true;
+    }else{
+        // give error message if not available
+        qDebug() << "can't find the correct arduino. Check if id or change in it.\n";
+    }
+}
+
+int Login::getInputArduino(){
+    int intreturn = 0;
+    if(arduino->isReadable() && arduino->isOpen())
+    {
+        QByteArray x;
+        qDebug() << "Readable";
+
+
+            arduino->waitForReadyRead(1000);    //hoelang je wilt wachten tot een input (verzalen alle input in die tijd)
+            if(arduino->bytesAvailable() <= 4)
+            {
+                 x = arduino->read(1);
+                 qDebug() << x;
+
+            }else if(arduino->bytesAvailable() > 4){
+                x = arduino->readAll();
+                qDebug() << x<< " byte";
+            }
+            if(x == "1")
+            {
+                qDebug() << "11";
+
+            }else if(x == "2")
+            {
+                intreturn = 2;
+                qDebug() << "22";
+
+            }
+            testArduinoQt(intreturn);
+            x.clear();
+
+    }else
+    {
+        qDebug() << "Couldn't read from serial!";
+    }
+    return intreturn;
+}
