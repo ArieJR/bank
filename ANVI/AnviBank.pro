@@ -8,19 +8,34 @@ TARGET = Bank
 
 QT = core gui \
     widgets \
-    core        #inti test
+    core \
+    sql \#inti test
 
+QT += widgets serialport
+
+
+QT+=testlib
+
+
+
+QT += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
     database.cpp \
     login.cpp \
-    main.cpp
+    main.cpp \
+    masterthread.cpp \
+    slavethread.cpp
+
+
 
 HEADERS += \
     database.h \
-    login.h
+    login.h \
+    masterthread.h \
+    slavethread.h
 
 
 FORMS += \

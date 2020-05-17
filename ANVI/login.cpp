@@ -5,8 +5,9 @@
 #include "QListWidgetItem"
 #include "qstring.h"
 #include "database.h"
-
+#include "qthread.h"
 #include <QLabel>
+
 #include <QFrame>
 
 
@@ -421,13 +422,15 @@ void Login:: createBonScherm()
 
 void Login::gotoVerwerkingsScherm()
 {
+    createVerwerkingsScherm();
     changeATMPage(9);
                                 //the money is being reserved on a special account before the confirmation is sent
 }
 
 void Login:: createVerwerkingsScherm()
 {
-
+    //msleep(5000);
+    gotoWelkomScherm();
 }
 
 //###########################ARDUINO################################################################
@@ -577,6 +580,8 @@ void Login::confirmWithdrawAmount()
 {
     bool wrongMult = false;
     bool notEnoughBalance = false;
+    QString wrongMultError = QString(tr("wrong multiplier"));
+    QString notEnoughBalanceError = QString(tr("not enough balance"));
 
 
     int amount = (bedragKeuze_invoerVeld->text()).toInt();
@@ -589,27 +594,58 @@ void Login::confirmWithdrawAmount()
     {
         if(amount%10!=0)
         {
-            //wrongMult = true;
-            QString wrongMult = QString(tr("wrong multiplier"));
+            wrongMult = true;
+            //QString wrongMult = QString(tr("wrong multiplier"));
         }
         if(checkBalance(amount) != true)
         {
-            //notEnoughBalance = true;
-            QString notEnoughBalance = QString(tr("not enough balance"));
-
+            notEnoughBalance = true;
+            //QString notEnoughBalance = QString(tr("not enough balance"));
         }
-        QString errorMessage = QString(tr("Error: %1 and %2")).arg(wrongMult).arg(notEnoughBalance);
-        labelContent(bedragKeuze_error_label, errorMessage);
+        if(wrongMult == true && notEnoughBalance == true)
+        {
+            errorMethod(wrongMultError, notEnoughBalanceError);
+        }
+        else if(wrongMult == true && notEnoughBalance == false)
+        {
+            errorMethod(wrongMultError);
+        }
+        else if(wrongMult == true && notEnoughBalance == false)
+        {
+            errorMethod(notEnoughBalanceError);
+        }
+        //QString errorMessage = QString(tr("Error: %1 and %2")).arg(wrongMult).arg(notEnoughBalance);
+        //labelContent(bedragKeuze_error_label, errorMessage);
+
         return;
     }
 
 }
 
 
+void Login::errorMethod(QString errormsg1, QString errormsg2)
+{
+    QLabel *label = new QLabel(this);
+    label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    QString error = QString(tr("first line: %1\nsecond line: %2").arg(errormsg1).arg(errormsg2));
+    label->setText(error);
+    label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+}
+
+void Login::errorMethod(QString errormsg1)
+{
+    QLabel *label = new QLabel(this);
+    label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    QString error = QString(tr("first line: %1").arg(errormsg1));
+    label->setText(error);
+    label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+}
+
 void Login::errorMethod()
 {
     QLabel *label = new QLabel(this);
     label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    label->setText("first line\nsecond line");
+    QString error = QString(tr("unknown error"));
+    label->setText(error);
     label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 }

@@ -3,6 +3,7 @@
 
 #include <QTranslator>
 #include "ui_login.h"
+#include "masterthread.h"
 
 class database;     //inti test
 
@@ -58,7 +59,9 @@ private:
     bool fastPin();
     bool checkBalance(float checkBal);
     bool isDutch = true;
-
+    void errorMethod(QString errormsg1, QString errormsg2);
+    void errorMethod(QString errormsg1);
+    void errorMethod();
     database *gebruikDatabase;
 
 private slots:
@@ -82,7 +85,7 @@ private slots:
     void labelContent(QLabel* labelToChange, const QString &newLabelContent);
     void changeATMPage(int idx);
 
-    void errorMethod();
+
 
 public slots:
     void gotoWelkomScherm(); //0

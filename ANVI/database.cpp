@@ -1,8 +1,65 @@
 #include "database.h"
 #include <QString>
+#include <iostream>
+#include <QtSql/QSqlDatabase>
+#include <QCoreApplication>
+#include <QtDebug>
+#include <qstring.h>
+#include <QSqlQuery>
+#include <QSqlError>
+
+#include <windows.h>
+
+#include "C:/Program Files/MySQL/MySQL Server 8.0/include/mysql.h"
 
 database::database()
 {
+    QSqlDatabase database = QSqlDatabase::addDatabase("MYSQL");
+    database.setHostName("127.0.0.1");
+    database.setPort(3306);
+    database.setDatabaseName("bank");
+    database.setUserName("root");
+    database.setPassword("root");
+    bool ok = database.open();
+
+    if(ok)
+    {
+        qDebug() << "Opened!";
+        QSqlQuery query;
+            query.exec("SELECT * from gebruiker");
+            qDebug() << query.lastError();
+        database.close();
+
+
+    }
+    else
+    {
+        qDebug() << "Error";
+    }
+
+
+        /*qDebug() << "Opened!";
+        QSqlQuery query(database);
+        bool test;
+        test = query.exec("SELECT * FROM bank.Gebruiker WHERE Gebruikers_ID = 1");
+        qDebug() << query.lastError();
+        if(test)
+        {
+            qDebug() << "succes!";
+
+        }
+        else
+        {
+            if(query.next())
+            {
+                qDebug() <<"finally :D";
+            }
+            else
+            {
+                qDebug() <<"could not send query";
+            }
+        }
+        database.close();*/
 
 }
 
