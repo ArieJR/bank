@@ -59,6 +59,7 @@ SELECT Biljet50 FROM Automaat WHERE Automaat_ID = "Pin_School";
 
 #saldo aanpassen naar beneden (voor veiligheid alleen naar beneden kunnnen)
 UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`+100 WHERE (`Gebruikers_ID` = '5');
 
 #pak saldo
 SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';

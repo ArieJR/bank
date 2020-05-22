@@ -126,6 +126,7 @@ void database::setNewBalance(float bedragGepind)
 {
     //rekeningnummer, bedragGepind
     //UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU-ANVI-12345600');
+    //UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`+100 WHERE (`Gebruikers_ID` = '5');
     balance -= bedragGepind;      //hard
 }
 
