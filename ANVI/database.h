@@ -4,11 +4,11 @@
 
 
 
+
 class database
 {
 public:
     explicit database();
-    QString teruggave();
 
     void checkGebruikersId();
     void sessieStart();
@@ -41,7 +41,7 @@ private:
     int gebruikersId;
     QString pasId;
     QString rekeningnummer;
-    QString automaatId;
+    QString automaatId = "Pin_School";
     int huidigeSessieId;
 
     bool pincode;

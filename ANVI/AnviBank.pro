@@ -8,7 +8,8 @@ TARGET = Bank
 
 QT = core gui \
     widgets \
-    core        #inti test
+    core \
+    sql
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
