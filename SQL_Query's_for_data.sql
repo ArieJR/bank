@@ -19,7 +19,7 @@
 
 
 #in rekening kijken welke gebruiker_ID bij rekeningnummer hoort
-SELECT Gebruikers_ID FROM Rekening WHERE Rekeningnummer='DU-ANVI-12345600';
+SELECT Gebruikers_ID FROM ANVI.Rekening WHERE Rekeningnummer='DU-ANVI-12345600';
 
 #Slaat Pas_ID, rekeningnummer en Automaat_ID op in sessie
 INSERT INTO `ANVI`.`Sessie` (`         Automaat_ID`, `Pas_ID`, `Gebruikers_ID`, `Rekeningnummer`)

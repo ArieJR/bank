@@ -43,10 +43,10 @@ void database::sessieStart()
 
 bool database::checkPassword(QString pincodeIngevoerd) //gehashed
 {
-    //SELECT case when 1234=(SELECT Pincode FROM Pas WHERE Rekeningnummer='DU99ANVI4445556667') then 1 else 0 end as bool FROM ANVI.Pas;
+    //SELECT case when 1234=(SELECT Pincode FROM ANVI.Pas WHERE Rekeningnummer='DU99ANVI4445556667') then 1 else 0 end as bool FROM ANVI.Pas;
 
     QSqlQuery query;
-    query.prepare("SELECT case when :pinIn=(SELECT Pincode FROM Pas WHERE Rekeningnummer= :rekn) then 1 else 0 end as bool FROM ANVI.Pas");
+    query.prepare("SELECT case when :pinIn=(SELECT Pincode FROM ANVI.Pas WHERE Rekeningnummer= :rekn) then 1 else 0 end as bool FROM ANVI.Pas");
     query.bindValue(":pinIn", pincodeIngevoerd);
     query.bindValue(":rekn", rekeningnummer);
     pincode = query.exec();
