@@ -17,6 +17,8 @@
 #uitlog_tijd													#	&
 
 
+#in Pas kijken of rekeningnummer bestaat
+SELECT case when 'DU-ANVI-12345600'=(SELECT Rekeningnummer FROM ANVI.Pas WHERE Rekeningnummer='DU-ANVI-12345600') then 1 else 0 end as bool FROM ANVI.Pas;
 
 #in rekening kijken welke gebruiker_ID bij rekeningnummer hoort
 SELECT Gebruikers_ID FROM ANVI.Rekening WHERE Rekeningnummer='DU-ANVI-12345600';
@@ -62,7 +64,7 @@ UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`-100 WHERE (`Rekeningnummer` = 'DU
 UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`+100 WHERE (`Gebruikers_ID` = '5');
 
 #pak saldo
-SELECT saldo FROM Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
+SELECT saldo FROM Rekening WHERE `Rekeningnummer` = "DU-ANVI-12345600";
 
 #verlaag briefjes
 UPDATE `ANVI`.`Automaat` SET `Biljet50` = `Biljet50`-3 WHERE (`Automaat_ID` = 'Pin_School');
