@@ -1,6 +1,7 @@
 # Created by and for Qt Creator This file was created for editing the project sources only.
 # You may attempt to use it for building too, by modifying this file here.
 
+#requires(qtConfig(combobox))
 #TARGET = AnviBank
 
 TEMPLATE = app
@@ -10,6 +11,8 @@ QT = core gui \
     widgets \
     core \
     sql
+
+QT += serialport
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
