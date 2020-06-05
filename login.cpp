@@ -178,7 +178,6 @@ void Login::readArduino()
         {
            qDebug() << "bigger";
         }
-
     }
 }
 
@@ -201,6 +200,7 @@ void Login::goToPage(QString command)
             gotoInlogScherm();
         }
     }
+
     else if(pageId == 1)
     {
         qDebug() << "in de pagina";
@@ -450,8 +450,8 @@ void Login::goToPage(QString command)
         }
     }
 
-
     qDebug() << command;
+
 }
 //#######################CHANGE CONTAINER MESSAGE##########################################################################################################################
 
@@ -465,6 +465,7 @@ void Login::buttonContent(QPushButton *changeButtonTo, const QString &newButtonC
    changeButtonTo->setText(newButtonContent);
 
 }
+
 
 
 //################################INDEX'S###############################################################
@@ -609,7 +610,9 @@ void Login::createSnelPinnenButton()
     }
     else
     {
+
         hoofd_snelPinnen_button -> hide();
+
     }
     //get last 10 transaction amounts pick the one that is pinned the most
     //if multiple amounts have the same amount use the last 9 etc.. until you get it right
@@ -618,10 +621,13 @@ void Login::createSnelPinnenButton()
 
 //-----------------------------------------------------------------------------
 
+
+
 void Login::gotoSaldoScherm()
 {
     createSaldoScherm();
     changeATMPage(4);
+
 }
 
 void Login:: createSaldoScherm()
