@@ -53,10 +53,10 @@ bool printNu = false;
 
 
 // counter that register how many of which note are in queue
-int var10;
-int var20;
-int var50;
-
+int var10;    //q
+int var20;    //w
+int var50;    //e
+//meot nog aangepast worden
 // Pins for 10 notes
 int in1Pin = 13;
 int in2Pin = 2;
