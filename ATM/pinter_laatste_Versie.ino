@@ -109,8 +109,8 @@ void WriteData(char dataId, int data) // kijk waar data hoort
 {
       if(dataId == 't') //als een 't' bij SerialDataIn is
    {
-    String TransIn = String(data);
-    Transactienummer = "Transactienummer:       "+TransIn;
+    String TransIn = String(data);  // maak de inkomende int een string
+    Transactienummer = "Transactienummer:       "+TransIn;    
     
     transactienummer = true;
    }
@@ -175,7 +175,7 @@ void Printerprint()   // het design van de bon
  printer.println(Tijd);                                 
  printer.justify('L');
  printer.println("");
- printer.println("Automaatnummer:          ""0001");  //onze automaat id
+ printer.println("Automaatnummer:          ""0404");  //onze automaat id
  printer.println(Transactienummer);
  printer.println("");
  printer.println(Rekeningnummer);
