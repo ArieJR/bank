@@ -4,6 +4,22 @@
 const io = require("socket.io-client");
 const socket = io.connect("http://172.16.0.1:8085");
 
+//database setup
+var mysql = require('mysql');
+
+var database = mysql.createConnection
+({
+    host:"localhost",
+    user:"0981073",
+    password:"inti54321",
+    database:"ANVI"
+});
+
+database.connect(function(err)
+{
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 //terwijl er connectie is met de Land-node
 socket.on("connect", function()
@@ -21,7 +37,7 @@ socket.on("connect", function()
         header:
         {
             originCountry: 'DE',
-            originBank: 'HOII',
+            originBank: 'ANVI',
             receiveCountry: 'DE',
             receiveBank: 'ANVI'
         }
@@ -36,7 +52,7 @@ socket.on("connect", function()
         header:
         {
             originCountry: 'DE',
-            originBank: 'DASB',
+            originBank: 'ANVI',
             receiveCountry: 'DE',
             receiveBank: 'ANVI'
         }
@@ -64,8 +80,9 @@ socket.on("connect", function()
     }
 
     //op deze manier een emit versturen
-    // emitBalance('7654','12345600','ANVI','DE');
-    // emitWithdraw('7654','12345600',20,'ANVI','DE');
+    // emitBalance('7654','12345600','DASB','DE');
+    
+    // emitWithdraw('7654','12345600',20,'DASB','DE');
 
 
     //voor het verhandelen van de ontvangst nadat er data is opgevraagd
