@@ -82,7 +82,7 @@ private slots:
     void labelContent(QLabel* labelToChange, const QString &newLabelContent);
     void changeATMPage(int idx);
 
-    void errorMethod();
+    void errorMethod(int error);
 
 public slots:
     void gotoWelkomScherm(); //0

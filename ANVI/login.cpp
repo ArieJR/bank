@@ -201,16 +201,13 @@ void Login::gotoInlogScherm()
     {
         //melding pas geblokkeerd
 
-        errorMethod();
+        errorMethod(1);
     }
     else
     {
         createInlogScherm();
         changeATMPage(1);
-        QLabel *label = new QLabel(this);
-        label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-        label->setText("first line\nsecond line");
-        label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+        //errorMethod();
     }
 }
 
@@ -472,7 +469,6 @@ void Login::loginAttempt()
 
     else
     {
-        //wrongPwMsg();
         if(gebruikDatabase->checkGeblokkeerd() == false)
         {
             createInlogScherm();
@@ -480,8 +476,8 @@ void Login::loginAttempt()
         else
         {
             returnCard();
-            //your card is blocked message
             endSession();
+            errorMethod(4);
         }
     }
 
@@ -502,9 +498,22 @@ bool Login::verifyPincode()
     {
         gebruikDatabase->pogingOmhoog();
         inlog_invoerveldPincode->clear();
-        if(gebruikDatabase->checkPogingen() >= 3)
+
+        int pog = gebruikDatabase->checkPogingen();
+        switch (pog)
         {
-            gebruikDatabase->blokeerPas();
+            case 1:
+                errorMethod(2);
+                break;
+            case 2:
+                errorMethod(3);
+                break;
+            case 3:
+                errorMethod(4);
+                gebruikDatabase->blokeerPas();
+                break;
+            default:
+                break;
         }
         return false;
     }
@@ -575,8 +584,7 @@ bool Login::checkBalance(float checkBal)
 
 void Login::confirmWithdrawAmount()
 {
-    bool wrongMult = false;
-    bool notEnoughBalance = false;
+
 
 
     int amount = (bedragKeuze_invoerVeld->text()).toInt();
@@ -587,29 +595,53 @@ void Login::confirmWithdrawAmount()
     }
     else
     {
+        bool wrongMulti = false;
+        bool notEnoughBalanceBool = false;
+        QString wrongMult;
+        QString notEnoughBalance;
+        QString both;
         if(amount%10!=0)
         {
-            //wrongMult = true;
-            QString wrongMult = QString(tr("wrong multiplier"));
+            wrongMulti = true;
+            wrongMult = QString(tr("wrong multiplier"));
         }
         if(checkBalance(amount) != true)
         {
-            //notEnoughBalance = true;
-            QString notEnoughBalance = QString(tr("not enough balance"));
-
+            notEnoughBalance = true;
+            notEnoughBalance = QString(tr("not enough balance"));
         }
-        QString errorMessage = QString(tr("Error: %1 and %2")).arg(wrongMult).arg(notEnoughBalance);
+        if(wrongMulti && notEnoughBalanceBool)
+        {
+            both = QString(tr(" and "));
+        }
+        else
+        {
+            both = QString(tr(" "));
+        }
+        QString errorMessage = QString(tr("Error: %1 %2 %3")).arg(wrongMult).arg(both).arg(notEnoughBalance);
         labelContent(bedragKeuze_error_label, errorMessage);
         return;
     }
-
 }
 
 
-void Login::errorMethod()
+void Login::errorMethod(int error)
 {
-    QLabel *label = new QLabel(this);
-    label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    label->setText("first line\nsecond line");
-    label->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    switch(error)
+    {
+        case 1:
+            labelContent(welkom_label, ("Neem kaart uit, de kaart is geblokkeerd"));
+            break;
+        case 2:
+            labelContent(inlog_label, ("Foute pincode: nog 2 pogingen"));
+            break;
+        case 3:
+            labelContent(inlog_label, ("Foute pincode: nog 1 poging"));
+            break;
+        case 4:
+            labelContent(welkom_label, ("3 foute pogingen, pas geblokkeerd"));
+            break;
+        default:
+            break;
+    }
 }

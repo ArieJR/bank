@@ -37,7 +37,7 @@
     <enum>QFrame::Panel</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>9</number>
    </property>
    <widget class="QWidget" name="welkomScherm">
     <widget class="QPushButton" name="welkom_taal_button">
@@ -69,7 +69,7 @@
       <rect>
        <x>540</x>
        <y>270</y>
-       <width>201</width>
+       <width>181</width>
        <height>161</height>
       </rect>
      </property>
@@ -81,8 +81,23 @@
        <kerning>true</kerning>
       </font>
      </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Welcome &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Insert your card&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="welkom_inlog_button">
@@ -255,9 +270,9 @@
     <widget class="QLabel" name="inlog_label">
      <property name="geometry">
       <rect>
-       <x>590</x>
-       <y>410</y>
-       <width>100</width>
+       <x>450</x>
+       <y>390</y>
+       <width>381</width>
        <height>31</height>
       </rect>
      </property>
@@ -268,7 +283,10 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Error?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="inlog_invoerveldPincode">
@@ -2130,10 +2148,10 @@
     <widget class="QLabel" name="bedragKeuze_error_label">
      <property name="geometry">
       <rect>
-       <x>550</x>
+       <x>420</x>
        <y>390</y>
-       <width>161</width>
-       <height>31</height>
+       <width>421</width>
+       <height>61</height>
       </rect>
      </property>
      <property name="font">
@@ -2143,7 +2161,13 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Error&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="bedragKeuze_logo">

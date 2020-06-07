@@ -46,7 +46,7 @@ private:
 
     bool pincode;
     bool pasGeblokkeerd = false;    //hard
-    int aantalFoutpogingen;
+    int aantalFoutpogingen= 0;
 
     int biljet50;
     int biljet20;
