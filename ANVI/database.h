@@ -34,27 +34,29 @@ public:
     void verlaag10Briefjes(int numberOfNotes);
 
     float getTotaalGeldInATM();
+    QString ArduinoRekeningnummer = rekeningnummer;
+    int sessieIdNu = huidigeSessieId +1;
 
 private:
     QString woord;
 
     int gebruikersId;
-    QString pasId;
-    QString rekeningnummer;
+    QString pasId ;
+    QString rekeningnummer = "DU-ANVI-12347878";
     QString automaatId = "Pin_School";
-    int huidigeSessieId;
+    int huidigeSessieId = 20;
 
-    bool pincode;
+    bool pincode ;
     bool pasGeblokkeerd = false;    //hard
-    int aantalFoutpogingen= 0;
+    int aantalFoutpogingen = 0;
 
-    int biljet50;
-    int biljet20;
-    int biljet10;
+    int biljet50=20;
+    int biljet20=20;
+    int biljet10=20;
 
     float balance = 200;
-    float withdrawnToday;
-    float bedragGepind;
+    float withdrawnToday = 0;
+    float bedragGepind = 70;
 
     float bedragInAutomaat;
     float biljet10InAutomaat;
