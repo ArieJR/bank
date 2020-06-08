@@ -374,7 +374,7 @@ void Login::gotoPreviousPage()
         buttonContent(saldo_welkom_button, tr("abort"));
         buttonContent(saldo_pinKeuze_button, tr("choose amount"));
         buttonContent(saldo_hoofdscherm_button, tr("main page"));
-        labelContent(textTwo_3, getBalanceString());
+        labelContent(textTwo_3, "Uw saldo = : €" +getBalanceString());
 
         //get saldo and display on GUI
         //labelContent(saldo_label_wat_is_saldo);
@@ -565,23 +565,42 @@ void Login::keyInput(int idx, int key) //idx is the current page idx, key is the
     if(key > 9 && key < 14)//'#'
         {
             Login::specialKeys(idx, key);
+            return;
         }
     if((idx == 1) && (key >= 0 && key <= 9))
     {
         QString s = QString::number(key);
         inputBox_2->insert(s);
+        return;
     }
     if((idx == 3) && (key >= 0 && key <= 9))
     {
         QString s = QString::number(key);
         inputBox_4->insert(s);
+        return;
     }
-
+    
+    if (idx == 0 && key == 1)
+    {
+       gotoInlogScherm();
+       return;
+    }   
+    if (idx == 3 && key == 1)
+    {
+        labelContent(textTwo_3, "Uw saldo = : €" +getBalanceString());
+    }
+    if (idx == 3 && key == 14)
+    {
+        chec
+        buttonContent(Bbutton_3, "Uw saldo = : €" +getBalanceString());
+    }
     if(buttonField)
     {
         if(key == 1 || key == 4 || key == 7 || (key > 13 && key < 16))
         {
-
+            if(idx == 1 && key == 1){
+                
+            }
         }
     }
 
@@ -626,7 +645,7 @@ void Login::specialKeys(int idx, int key)
             gotoHoofdScherm();
             return;
         }
-        //abort? -> end session go to welcome page
+        
         else if(idx < 3)
         {
             return;
@@ -644,277 +663,6 @@ void Login::specialKeys(int idx, int key)
     }
 }
 
-void Login::goToPage(QString command)
-{
-    qDebug() << "ontvangen";
-    qDebug() << "ontvangen data:  "<<command;
-    //ik weet dat het met coses kan ga ik nog veranderen
-    if(pageId == 0)
-    {
-        qDebug() << "in de pagina";
-        if(command == "A\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            gotoTaalScherm();
-        }
-        else if(command == "B\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoInlogScherm();
-        }
-    }
-    else if(pageId == 1)
-    {
-        qDebug() << "in de pagina";
-        if(command == "A\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-
-            gotoTaalScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "#\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            loginAttempt();
-        }
-        else if(command == "*\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            loginAttempt();
-        }
-    }
-    else if(pageId == 2)
-    {
-        qDebug() << "in de pagina";
-        if(command == "A\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoPreviousPage();             //probleem!!!!!!!!!!
-        }
-        else if(command == "B\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoPreviousPage();
-        }
-        else if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoPreviousPage();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "#\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoPreviousPage();
-        }
-    }
-    else if(pageId == 3)
-    {
-        qDebug() << "in de pagina";
-        if(command == "A\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoTaalScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "1\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoBonScherm();
-        }
-        else if(command == "2\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoPinKeuzeScherm();
-        }
-        else if(command == "3\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoSaldoScherm();
-        }
-    }
-    else if(pageId == 4)
-    {
-        qDebug() << "in de pagina";
-        if(command == "B\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoPinKeuzeScherm();
-        }
-        else if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoHoofdScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-
-    }
-    else if(pageId == 5)
-    {
-        qDebug() << "in de pagina";
-        if(command == "1\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoBiljetScherm();
-        }
-        else if(command == "2\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoBiljetScherm();
-        }
-        else if(command == "3\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoBiljetScherm();
-        }
-        else if(command == "4\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoBiljetScherm();
-        }
-        else if(command == "5\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoBiljetScherm();
-        }
-        else if(command == "B\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoBedragScherm();
-        }
-        else if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoHoofdScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-    }
-    else if(pageId == 6)
-    {
-        qDebug() << "in de pagina";
-        if(command == "A\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoTaalScherm();
-        }
-        else if(command == "B\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            loginAttempt();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-    }
-    else if(pageId == 7)
-    {
-        qDebug() << "in de pagina";
-        if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoTaalScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "#\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            confirmWithdrawAmount();
-        }
-    }
-    else if(pageId == 8)
-    {
-        qDebug() << "in de pagina";
-        if(command == "C\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoHoofdScherm();
-        }
-        else if(command == "D\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            endSession();
-        }
-        else if(command == "#\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId;
-            qDebug() << "2  "<<command;
-            gotoVerwerkingsScherm();
-        }
-        else if(command == "*\r\n")      //kan korter maken maar het werkt op dit momment
-        {
-            qDebug() <<"page: "<< pageId; //we missen nog de delete functie
-            qDebug() << "2  "<<command;
-            gotoVerwerkingsScherm();
-        }
-    }
-
-
-    qDebug() << command;
-}
 
 //###########################DATABASE###########################################################################################
 

@@ -210,7 +210,7 @@ float database::getBalance()
     QSqlQuery query;
     query.prepare("SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = :rekn");
     query.bindValue(":rekn", rekeningnummer);
-    balance = query.exec();
+    //balance = query.exec();
 
     return balance;
 }
