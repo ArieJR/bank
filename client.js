@@ -80,9 +80,10 @@ socket.on("connect", function()
     }
 
     //op deze manier een emit versturen
-    // emitBalance('7654','12345600','DASB','DE');
-    
-    // emitWithdraw('7654','12345600',20,'DASB','DE');
+    // emitBalance('1122','00000002','DASB','DE');
+    // emitBalance('1122','00000012','DASB','DE');
+    // emitBalance('1142','00000002','DASB','DE');
+    // emitWithdraw('1122','00000002',50,'DASB','DE');
 
 
     //voor het verhandelen van de ontvangst nadat er data is opgevraagd
