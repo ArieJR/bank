@@ -98,5 +98,4 @@ socket.on('response', responseBody =>
     {
         //bestaat niet
     }
-
 })
