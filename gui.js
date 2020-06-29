@@ -4,6 +4,11 @@ var app = express();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
+//tussen js
+const { fork } = require('child_process');
+const landNode = fork('client.js');
+
+
 //database setup
 var mysql = require('mysql');
 
@@ -25,6 +30,19 @@ database.connect(function(err)
 io.on('connection', function(socket)
 {
     console.log('made socket connection', socket.id)
+
+    socket.on('bank', function(data)
+    {
+        console.log(data);
+
+        landNode.send(data);                            //data doorsturen naar client.js
+
+        landNode.on("message", function(response)       //data ontvangen en doorsturen naar QT
+        {
+            console.log(response);
+            socket.emit('response', (response));
+        });
+    });
 
     //withdraw handler, voor het afhandelen van de vraag naar een withdraw
     socket.on('withdraw', function(data)
@@ -267,7 +285,7 @@ io.on('connection', function(socket)
         })
     });
 });
-    
+
 http.listen(8080, function()
 {
     console.log('listening on: 8080')

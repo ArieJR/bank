@@ -21,46 +21,48 @@ database.connect(function(err)
     console.log("Connected!");
 });
 
+
+process.on('message', response => 
+{
+    console.log(response);
+    if(data.header.action == 'balance')
+    {
+        //balance actie
+        
+    }
+    else
+    {
+        //withdraw actie
+    }
+    chuan = response.body.code;
+    process.send(chuan)
+})
+
+/*
 //terwijl er connectie is met de Land-node
 socket.on("connect", function()
 {
     console.log("connected to server");
 
-    withdraw =
-    {
-        body:
-        {
-            pin: '0000',
-            account: '01234567',
-            amount: 30.00
-        },
-        header:
-        {
-            originCountry: 'DE',
-            originBank: 'ANVI',
-            receiveCountry: 'DE',
-            receiveBank: 'ANVI'
-        }
-    }
-
-    getBalance = {
-        body:
-        {
-            pin: '7654',
-            account: '12345600'
-        },
-        header:
-        {
-            originCountry: 'DE',
-            originBank: 'ANVI',
-            receiveCountry: 'DE',
-            receiveBank: 'ANVI'
-        }
-    }
-
     //functies voor opvragen van data via emit
     function emitWithdraw(pin, rek, amount, aankomstBank, aankomstLand)
     {
+        withdraw =
+        {
+            body:
+            {
+                pin: '0000',
+                account: '01234567',
+                amount: 30.00
+            },
+            header:
+            {
+                originCountry: 'DE',
+                originBank: 'ANVI',
+                receiveCountry: 'DE',
+                receiveBank: 'ANVI'
+            }
+        }
         withdraw.body.pin = pin;
         withdraw.body.account = rek;
         withdraw.body.amount = amount;
@@ -71,6 +73,21 @@ socket.on("connect", function()
     }
     function emitBalance(pin, rek, aankomstBank, aankomstLand)
     {
+        getBalance = 
+        {
+            body:
+            {
+                pin: '7654',
+                account: '12345600'
+            },
+            header:
+            {
+                originCountry: 'DE',
+                originBank: 'ANVI',
+                receiveCountry: 'DE',
+                receiveBank: 'ANVI'
+            }
+        }
         getBalance.body.pin = pin;
         getBalance.body.account = rek;
         getBalance.header.receiveBank = aankomstBank;
@@ -366,5 +383,5 @@ socket.on("connect", function()
         })
     });
 });
-
+*/
 
