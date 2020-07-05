@@ -97,7 +97,11 @@ private:
     bool checkBalance(float checkBal);
     bool isDutch = true;
 
-
+    void getTime();
+    void bonPrint();
+    void geldGeven();
+    
+    bool pasInAutomaat = false;
 
     void buttonContent(QPushButton* textOfButton, const QString &newButtonContent);
 
