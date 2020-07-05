@@ -34,7 +34,8 @@ public:
     void verlaag10Briefjes(int numberOfNotes);
 
     float getTotaalGeldInATM();
-
+    int sessieIdNu = huidigeSessieId+1;
+    Qstring ArduinoRekeningnummer =  "DU-ANVI-12347878";
 private:
     QString woord;
 
