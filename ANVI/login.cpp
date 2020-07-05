@@ -22,6 +22,9 @@
 #include <QListView>
 #include <QQmlComponent>
 #include <QtQuick/QQuickItem>
+#include <QDate>
+#include <QTime>
+
 
 //! [0]
 Login::Login(QWidget *parent)
@@ -531,6 +534,12 @@ void Login::readArduino()
             qDebug() << appId;
             keyInput(ATM->currentIndex(), appId);
         }
+        else if(dataRead.left(4) == "kip1") // dit is een keywoord om te kijken of het string een rekeningnummer is(kan verandert worden)
+        {
+            QString pasId= dataRead;
+            pasRekenningnummer = pasId.mid(4,16); //4 is waar het start en 16 is hoelang het nieuwe string moet zijn(rekeningnummer)
+            pasInAutomaat = true;
+        }
         else
         {
            qDebug() << "bigger";
@@ -819,7 +828,30 @@ void Login::noteOptions(int amountWithdraw)
      return;
 
 
-
+void Login::getTime()
+{
+    sendToArduino(QString("y%1").arg(QDate::currentDate().year()));     //pakt de jaar 
+    sendToArduino(QString("m%1").arg(QDate::currentDate().month()));    // pakt de maand
+    sendToArduino(QString("d%1").arg(QDate::currentDate().day()));      // pakt de dag van vandaag
+    //pakt de tijd op dat moment
+    sendToArduino(QString("h%1").arg(QTime::currentTime().hour()));
+    sendToArduino(QString("n%1").arg(QTime::currentTime().minute()));
+    sendToArduino(QString("s%1").arg(QTime::currentTime().second()));
+}
+void Login::bonPrint()
+{
+    sendToArduino(QString("t%1").arg(gebruikDatabase->sessieIdNu));    //voor transactienummer
+    sendToArduino(QString("r%1").arg(gebruikDatabase->ArduinoRekeningnummer.right(4)));   //rekening nummer (4cijfers)
+    sendToArduino(QString("b%1").arg(gebruikDatabase->getBalance()));  //bedrag
+    getTime();
+}
+void Login::geldGeven()
+{
+    //geef in arg() het aantal brieven uit moet komen
+    //sendToArduino(QString("q%1").arg());    //10
+    //sendToArduino(QString("w%1").arg());    //20
+    //sendToArduino(QString("e%1").arg());    //50
+}
 
 
 }
