@@ -3024,7 +3024,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="welcomeFrame">
      <widget class="QFrame" name="pagesFrame">
@@ -4535,16 +4535,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QLineEdit" name="inputBox_6">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>180</y>
-          <width>121</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QLabel" name="textOne_6">
         <property name="geometry">
          <rect>
@@ -4820,16 +4810,6 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
-       <widget class="QLineEdit" name="inputBox_7">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>180</y>
-          <width>121</width>
-          <height>51</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QLabel" name="textOne_7">
         <property name="geometry">
          <rect>

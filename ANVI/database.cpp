@@ -2,14 +2,70 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QtSql>
+//#include <C:/Qt/5.14.2/Src/qtbase/src/plugins/sqldrivers/mysql/qsql_mysql.cpp>
 
+//#include <qsql.h>
 
 
 database::database()
 {
+   /* QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    QString connectString = "Driver={SQL Server};"; // Driver can also be {SQL Server Native Client 11.0}
+    database.setHostName("127.0.0.1");   // Hostname,SQL-Server Instance
+    database.setPort(52496);  // Schema
+    database.setDatabaseName("ANVI");
+    database.setUserName("root;");           // User
+    database.setPassword("root;");           // Pass
+    //database.setDatabaseName(connectString);
+    if(database.open())
+    {
+        qDebug() << "Opened!";
+    }else{
+        qDebug() << "Error";
+    }*/
+/*{
+    QSqlDatabase database = QSqlDatabase::addDatabase("QODBC");
+    database.setHostName("145.24.222.11");
+    database.setPort(22);
+    database.setDatabaseName("bank");
+    database.setUserName("ubuntu-0981073");
+    database.setPassword("7V33bK");
+    if (!database.open())
+    {
+       qDebug() << "Error";
+        //return false;
+    }
 
+    else
+    {
+
+
+        qDebug() << "Opened!";
+        QSqlQuery query(database);
+        bool test;
+        test = query.exec("SELECT * FROM bank.Gebruiker WHERE Gebruikers_ID = 1");
+        qDebug() << query.lastError();
+        if(test)
+        {
+            qDebug() << "succes!";
+
+        }
+        else
+        {
+            if(query.next())
+            {
+                qDebug() <<"finally :D";
+            }
+            else
+            {
+                qDebug() <<"could not send query";
+            }
+        }
+        database.close();
+    }
 }
-
+*/
+}
 //in rekening kijken welke gebruiker_ID bij rekeningnummer hoort
 void database::checkGebruikersId()
 {
@@ -148,7 +204,7 @@ int database::get50BriefgeldAantal()
     biljet50 = query.exec();
 
 
-    biljet50 = 20;       //hard
+    //biljet50 = 20;       //hard
     return biljet50;
 }
 
@@ -162,7 +218,7 @@ int database::get20BriefgeldAantal()
     biljet20 = query.exec();
 
 
-    biljet20 = 20;       //hard
+    //biljet20 = 20;       //hard
     return biljet20;
 }
 
@@ -176,7 +232,7 @@ int database::get10BriefgeldAantal()
     biljet10 = query.exec();
 
 
-    biljet10 = 20;       //hard
+    //biljet10 = 20;       //hard
     return biljet10;
 }
 
@@ -207,12 +263,19 @@ float database::getBalance()
 {
     //SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
 
-    QSqlQuery query;
+    /*QSqlQuery query;
     query.prepare("SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = :rekn");
     query.bindValue(":rekn", rekeningnummer);
     balance = query.exec();
 
-    return balance;
+    return balance;*/
+    QSqlQuery query("SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600'");
+        while (query.next()) {
+            QString bal = query.value(0).toString();
+            qDebug() << bal;
+        }
+
+        return balance;
 }
 
 //maximaal bedrag dat valt te pinnen per dag checken
@@ -227,7 +290,7 @@ float database::getAmountWithdrawnToday()
     withdrawnToday = query.exec();
 
 
-    withdrawnToday = 200;   //hard
+    //withdrawnToday = 200;   //hard
     return withdrawnToday;
 }
 
@@ -294,12 +357,12 @@ float database::getTotaalGeldInATM()
 
 
     //hard
-    biljet10InAutomaat = 10;
-    biljet20InAutomaat = 10;
-    biljet50InAutomaat = 10;
+    //biljet10InAutomaat = 10;
+    //biljet20InAutomaat = 10;
+    //biljet50InAutomaat = 10;
 
 
-    bedragInAutomaat = biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
+    //bedragInAutomaat = biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
 
-    return bedragInAutomaat;
+    return biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
 }
