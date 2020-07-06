@@ -1,14 +1,21 @@
+//import QtQuick 2.0
+
 #include "login.h"
 #include <qtranslator.h>
 #include <QApplication>
 //#include <QSerialPort>
+#include <QtQuick/QQuickItem>
+#include <QtQml/QQmlComponent>
+
 
 //! [0]
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    QApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 
     QApplication app(argc, argv);
+    //QApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
     //QT_AUTO_SCREEN_SCALE_FACTOR=1 ./app
 
     //QTranslator translator;

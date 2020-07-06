@@ -40,20 +40,20 @@ private:
 
     int gebruikersId;
     QString pasId;
-    QString rekeningnummer;
+    QString rekeningnummer = "DU-ANVI-12347878";
     QString automaatId = "Pin_School";
     int huidigeSessieId;
 
     bool pincode;
     bool pasGeblokkeerd = false;    //hard
-    int aantalFoutpogingen;
+    int aantalFoutpogingen = 0;
 
-    int biljet50;
-    int biljet20;
-    int biljet10;
+    int biljet50 = 20;
+    int biljet20 = 20;
+    int biljet10 = 20;
 
-    float balance = 200;
-    float withdrawnToday;
+    float balance = 500.00;
+    float withdrawnToday = 0;
     float bedragGepind;
 
     float bedragInAutomaat;

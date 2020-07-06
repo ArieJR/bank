@@ -2,14 +2,70 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QtSql>
+//#include <C:/Qt/5.14.2/Src/qtbase/src/plugins/sqldrivers/mysql/qsql_mysql.cpp>
 
+//#include <qsql.h>
 
 
 database::database()
 {
+   /* QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    QString connectString = "Driver={SQL Server};"; // Driver can also be {SQL Server Native Client 11.0}
+    database.setHostName("127.0.0.1");   // Hostname,SQL-Server Instance
+    database.setPort(52496);  // Schema
+    database.setDatabaseName("ANVI");
+    database.setUserName("root;");           // User
+    database.setPassword("root;");           // Pass
+    //database.setDatabaseName(connectString);
+    if(database.open())
+    {
+        qDebug() << "Opened!";
+    }else{
+        qDebug() << "Error";
+    }*/
+/*{
+    QSqlDatabase database = QSqlDatabase::addDatabase("QODBC");
+    database.setHostName("145.24.222.11");
+    database.setPort(22);
+    database.setDatabaseName("bank");
+    database.setUserName("ubuntu-0981073");
+    database.setPassword("7V33bK");
+    if (!database.open())
+    {
+       qDebug() << "Error";
+        //return false;
+    }
 
+    else
+    {
+
+
+        qDebug() << "Opened!";
+        QSqlQuery query(database);
+        bool test;
+        test = query.exec("SELECT * FROM bank.Gebruiker WHERE Gebruikers_ID = 1");
+        qDebug() << query.lastError();
+        if(test)
+        {
+            qDebug() << "succes!";
+
+        }
+        else
+        {
+            if(query.next())
+            {
+                qDebug() <<"finally :D";
+            }
+            else
+            {
+                qDebug() <<"could not send query";
+            }
+        }
+        database.close();
+    }
 }
-
+*/
+}
 //in rekening kijken welke gebruiker_ID bij rekeningnummer hoort
 void database::checkGebruikersId()
 {
@@ -18,7 +74,7 @@ void database::checkGebruikersId()
    QSqlQuery query;
    query.prepare("SELECT Gebruikers_ID FROM ANVI.Rekening WHERE Rekeningnummer= :rekn");
    query.bindValue(":rekn", rekeningnummer);
-   gebruikersId = query.exec();
+   //gebruikersId = query.exec();
 }
 
 //Slaat Pas_ID, rekeningnummer en Automaat_ID op in sessie
@@ -32,12 +88,12 @@ void database::sessieStart()
     query.bindValue(":pasID", pasId);
     query.bindValue(":gebrID", gebruikersId);
     query.bindValue(":rekn", rekeningnummer);
-    query.exec();
+    //query.exec();
 
     //SELECT MAX(Session_ID) FROM ANVI.Sessie;
 
-    QSqlQuery query2 ("SELECT MAX(Session_ID) FROM ANVI.Sessie");
-    huidigeSessieId = query2.exec();
+    //QSqlQuery query2 ("SELECT MAX(Session_ID) FROM ANVI.Sessie");
+    //huidigeSessieId = query2.exec();
 }
 
 
@@ -49,7 +105,7 @@ bool database::checkPassword(QString pincodeIngevoerd) //gehashed
     query.prepare("SELECT case when :pinIn=(SELECT Pincode FROM ANVI.Pas WHERE Rekeningnummer= :rekn) then 1 else 0 end as bool FROM ANVI.Pas");
     query.bindValue(":pinIn", pincodeIngevoerd);
     query.bindValue(":rekn", rekeningnummer);
-    pincode = query.exec();
+    //pincode = query.exec();
 
 
     if(pincodeIngevoerd == "1234")      //hard
@@ -71,7 +127,8 @@ bool database::checkGeblokkeerd()
     QSqlQuery query;
     query.prepare("SELECT Pas_geblokkeerd FROM ANVI.Pas WHERE Rekeningnummer= :rekn");
     query.bindValue(":rekn", rekeningnummer);
-    pasGeblokkeerd = query.exec();
+    //pasGeblokkeerd = query.exec();
+
 
     return pasGeblokkeerd;
 }
@@ -83,7 +140,7 @@ void database::pogingReset()
     QSqlQuery query;
     query.prepare("UPDATE `ANVI`.`Pas` SET `Aantal_foutpogingen` = '0' WHERE (Rekeningnummer=:rekn");
     query.bindValue(":rekn", rekeningnummer);
-    query.exec();
+    //query.exec();
 
 
     aantalFoutpogingen = 0;     //hard
@@ -96,7 +153,7 @@ void database::pogingOmhoog()
     QSqlQuery query;
     query.prepare("UPDATE `ANVI`.`Pas` SET `Aantal_foutpogingen` = `Aantal_foutpogingen`+1 WHERE (Rekeningnummer= :rekn)");
     query.bindValue(":rekn", rekeningnummer);
-    query.exec();
+    //query.exec();
 
 
     aantalFoutpogingen++;       //hard
@@ -109,7 +166,7 @@ int database::checkPogingen()
     QSqlQuery query;
     query.prepare("SELECT Aantal_foutpogingen FROM ANVI.Pas WHERE (Rekeningnummer= :rekn)");
     query.bindValue(":rekn", rekeningnummer);
-    aantalFoutpogingen = query.exec();
+    //aantalFoutpogingen = query.exec();
 
     return aantalFoutpogingen;
 }
@@ -121,10 +178,10 @@ void database::blokeerPas()
     QSqlQuery query;
     query.prepare("UPDATE `ANVI`.`Pas` SET `Pas_geblokkeerd` = 1 WHERE (Rekeningnummer= :rekn)");
     query.bindValue(":rekn", rekeningnummer);
-    query.exec();
+    //query.exec();
 
 
-    pasGeblokkeerd= true;       //hard
+    pasGeblokkeerd = true;       //hard
 }
 
 void database::sessieEind()
@@ -145,10 +202,10 @@ int database::get50BriefgeldAantal()
     QSqlQuery query;
     query.prepare("SELECT Biljet50 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query.bindValue(":autID", automaatId);
-    biljet50 = query.exec();
+    //biljet50 = query.exec();
 
 
-    biljet50 = 20;       //hard
+    //biljet50 = 20;       //hard
     return biljet50;
 }
 
@@ -159,10 +216,10 @@ int database::get20BriefgeldAantal()
     QSqlQuery query;
     query.prepare("SELECT Biljet20 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query.bindValue(":autID", automaatId);
-    biljet20 = query.exec();
+    //biljet20 = query.exec();
 
 
-    biljet20 = 20;       //hard
+    //biljet20 = 20;       //hard
     return biljet20;
 }
 
@@ -173,10 +230,10 @@ int database::get10BriefgeldAantal()
     QSqlQuery query;
     query.prepare("SELECT Biljet10 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query.bindValue(":autID", automaatId);
-    biljet10 = query.exec();
+    //biljet10 = query.exec();
 
 
-    biljet10 = 20;       //hard
+    //biljet10 = 20;       //hard
     return biljet10;
 }
 
@@ -189,7 +246,7 @@ void database::setNewBalance(float bedragGepind)
     query.prepare("UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`- :gepind WHERE (`Rekeningnummer` = :rekn");
     query.bindValue(":rekn", rekeningnummer);
     query.bindValue(":gepind", bedragGepind);
-    query.exec();
+    //query.exec();
 
     //UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`+100 WHERE (`Gebruikers_ID` = '5');
 
@@ -197,7 +254,7 @@ void database::setNewBalance(float bedragGepind)
     query2.prepare("UPDATE `ANVI`.`Rekening` SET `Saldo` = `Saldo`+ :gepind WHERE (`Gebruikers_ID` = '5')");
     query2.bindValue(":rekn", rekeningnummer);
     query2.bindValue(":gepind", bedragGepind);
-    query2.exec();
+    //query2.exec();
 
 
     balance -= bedragGepind;      //hard
@@ -207,12 +264,19 @@ float database::getBalance()
 {
     //SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600';
 
-    QSqlQuery query;
+    /*QSqlQuery query;
     query.prepare("SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = :rekn");
     query.bindValue(":rekn", rekeningnummer);
     balance = query.exec();
 
-    return balance;
+    return balance;*/
+    QSqlQuery query("SELECT saldo FROM ANVI.Rekening WHERE `Rekeningnummer` = 'DU-ANVI-12345600'");
+        while (query.next()) {
+            QString bal = query.value(0).toString();
+            qDebug() << bal;
+        }
+
+        return balance;
 }
 
 //maximaal bedrag dat valt te pinnen per dag checken
@@ -224,10 +288,10 @@ float database::getAmountWithdrawnToday()
     QSqlQuery query;
     query.prepare("SELECT SUM(Bedrag_actie) FROM ANVI.Sessie WHERE (Aanmeld_tijd BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 1 DAY) AND current_timestamp()) AND Rekeningnummer = :rekn AND Actie = 'Pin'");
     query.bindValue(":rekn", rekeningnummer);
-    withdrawnToday = query.exec();
+    //withdrawnToday = query.exec();
 
 
-    withdrawnToday = 200;   //hard
+    //withdrawnToday = 200;   //hard
     return withdrawnToday;
 }
 
@@ -240,7 +304,7 @@ void database::verlaag50Briefjes(int numberOfNotes)
     query.prepare("UPDATE `ANVI`.`Automaat` SET `Biljet50` = `Biljet50`- :numbNotes WHERE (`Automaat_ID` = :autID");
     query.bindValue(":autID", automaatId);
     query.bindValue(":numbNotes", numberOfNotes);
-    query.exec();
+    //query.exec();
 }
 
 void database::verlaag20Briefjes(int numberOfNotes)
@@ -252,7 +316,7 @@ void database::verlaag20Briefjes(int numberOfNotes)
     query.prepare("UPDATE `ANVI`.`Automaat` SET `Biljet20` = `Biljet20`- :numbNotes WHERE (`Automaat_ID` = :autID");
     query.bindValue(":autID", automaatId);
     query.bindValue(":numbNotes", numberOfNotes);
-    query.exec();
+    //query.exec();
 }
 
 void database::verlaag10Briefjes(int numberOfNotes)
@@ -264,7 +328,7 @@ void database::verlaag10Briefjes(int numberOfNotes)
     query.prepare("UPDATE `ANVI`.`Automaat` SET `Biljet10` = `Biljet10`- :numbNotes WHERE (`Automaat_ID` = :autID");
     query.bindValue(":autID", automaatId);
     query.bindValue(":numbNotes", numberOfNotes);
-    query.exec();
+    //query.exec();
 }
 
 float database::getTotaalGeldInATM()
@@ -274,7 +338,7 @@ float database::getTotaalGeldInATM()
     QSqlQuery query;
     query.prepare("SELECT Biljet10 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query.bindValue(":autID", automaatId);
-    biljet10InAutomaat = query.exec();
+    //biljet10InAutomaat = query.exec();
 
 
     //SELECT Biljet20 FROM ANVI.Automaat WHERE Automaat_ID = 'Pin_School';
@@ -282,7 +346,7 @@ float database::getTotaalGeldInATM()
     QSqlQuery query2;
     query2.prepare("SELECT Biljet20 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query2.bindValue(":autID", automaatId);
-    biljet20InAutomaat = query2.exec();
+    //biljet20InAutomaat = query2.exec();
 
 
     //SELECT Biljet50 FROM ANVI.Automaat WHERE Automaat_ID = 'Pin_School';
@@ -290,16 +354,16 @@ float database::getTotaalGeldInATM()
     QSqlQuery query3;
     query3.prepare("SELECT Biljet50 FROM ANVI.Automaat WHERE Automaat_ID = :autID");
     query3.bindValue(":autID", automaatId);
-    biljet50InAutomaat = query3.exec();
+    //biljet50InAutomaat = query3.exec();
 
 
     //hard
-    biljet10InAutomaat = 10;
-    biljet20InAutomaat = 10;
-    biljet50InAutomaat = 10;
+    //biljet10InAutomaat = 10;
+    //biljet20InAutomaat = 10;
+    //biljet50InAutomaat = 10;
 
 
-    bedragInAutomaat = biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
+    //bedragInAutomaat = biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
 
-    return bedragInAutomaat;
+    return biljet10InAutomaat*10 + biljet20InAutomaat*20 + biljet50InAutomaat*50;
 }
